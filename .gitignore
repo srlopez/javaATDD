@@ -11,7 +11,8 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
+# *.jar
+# La librería de test la subo
 *.war
 *.nar
 *.ear
