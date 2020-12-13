@@ -1,5 +1,7 @@
 # Introducción a ATDD (Acceptance Test Driven Development) y Junit5
 
+>OJO! README.md NO FINALIZADO
+
 Ideas de:
 - http://www.chuidiang.org/java/herramientas/test-automaticos/tdd-test-driven-development.php
 - https://phauer.com/2019/modern-best-practices-testing-java/
@@ -107,7 +109,7 @@ Si un cliente con IVA y con RE elige un producto de 100€, en el detalle de la 
 ▸ Total: 126.20€ 
 
 
-### Propuestas y Rectificaciónes del cliente
+ **Propuestas (a la izda) y Rectificaciónes del cliente (a la dcha).
 
 Cliente con IVA y con RE: | Cliente con IVA y con RE:
 --|--
@@ -121,8 +123,8 @@ Cliente con IVA y sin RE: | Cliente con IVA y sin RE:
 -- | --
 ▸ Base Imponible: 100.00€  | ▸ Base Imponible: 100.00€ 
 ▸ I.V.A. (21%): 21.00€  | ▸ I.V.A. (21%): 21.00€ 
-▸ R.E. (0%): 0.00€  |   
-▸ Total: 121.00€ | ▸ Total: 121.00€
+▸ R.E. (0%): 0.00€  |   ▸ Total: 121.00€
+▸ Total: 121.00€ | 
 
 
 Cliente sin IVA y con RE:  | Cliente sin IVA y con RE: 
