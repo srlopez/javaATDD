@@ -1,4 +1,4 @@
-# Introducción al Acceptance Test Driven Development (TDD) y Junit5
+# Introducción a ATDD (Acceptance Test Driven Development) y Junit5
 
 Ideas de:
 - http://www.chuidiang.org/java/herramientas/test-automaticos/tdd-test-driven-development.php
