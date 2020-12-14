@@ -214,18 +214,18 @@ Antes es conveniente que se hayan ordenado por funcionalidad, agrupando todos lo
   
 **Ingresos.**
 - Suman la cantidad ingresada al saldo.
-- No hay comisiones ni nada por el estilo.
-  2. Al ingresar 100 en cuenta vacía el saldo es 100
-  3. Al ingresar 3000 en cuenta vacía el saldo es 3000
-  4. Al ingresar 3000 en cuenta con 100 el saldo es 3100
-- No se pueden hacer ingresos negativos
-  5.  Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0
-- Los ingresos admiten un máximo de 2 decimales de precisión
-  6. Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45
-  7. Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
-- La cantidad máxima que se puede ingresar es de 6000
-  8. Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
-  9. Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0
+- No hay comisiones ni nada por el estilo.   
+  2. Al ingresar 100 en cuenta vacía el saldo es 100  
+  3. Al ingresar 3000 en cuenta vacía el saldo es 3000  
+  4. Al ingresar 3000 en cuenta con 100 el saldo es 3100  
+- No se pueden hacer ingresos negativos  
+  5.  Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0  
+- Los ingresos admiten un máximo de 2 decimales de precisión  
+  6. Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45  
+  7. Si ingreso 100.457 en una cuenta vacía, el saldo es de 0  
+- La cantidad máxima que se puede ingresar es de 6000  
+  8. Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00  
+  9. Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0  
   
 **Retiradas.** (no sigo numerando...)  
 - Restan la cantidad ingresada al saldo.
@@ -684,12 +684,12 @@ No observamos nada que refactorizar, seguimos con el resto de casos
 #### Test #6, #7, #8, #9 - Categoría DECIMALES
 
 ***Ingresos***
-- Los ingresos admiten un máximo de 2 decimales de precisión
-  6. Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45
-  7. Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
-- La cantidad máxima que se puede ingresar es de 6000
-  8. Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
-  9. Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0   
+- Los ingresos admiten un máximo de 2 decimales de precisión  
+  6. Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45  
+  7. Si ingreso 100.457 en una cuenta vacía, el saldo es de 0  
+- La cantidad máxima que se puede ingresar es de 6000  
+  8. Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00  
+  9. Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0     
 
 Tests:
 ```java
