@@ -381,29 +381,36 @@ Ejecutemos ahora el test:
 ```
 
 Arreglemoslo, no con un código super completo, y super funcional, sino, recordemos, con el mínimo código necesario para que el test pase.
-...
+```java
 	public int getSaldo() {
 		return 0;
 	}
+```
 
-Volvemos a ejecutar el test…
-Y pasa. Hemos acabado el segundo paso del algoritmo.
-Este es otro de los chips, que tenemos que cambiar para aplicar TDD. No pensar en soluciones fantásticas super funcionales... Nos limitamos a hacer lo que hay que hacer, y nada más, aunque parezca sin sentido y erróneo.
+Volvemos a ejecutar el test…  
+Y pasa. **Hemos acabado el segundo paso del algoritmo**.
+
+<span style="color:green">
+Este es otro de los _chips_, que tenemos que cambiar para aplicar TDD. No pensar en soluciones fantásticas super funcionales... Nos limitamos a hacer lo que hay que hacer, y nada más, aunque parezca sin sentido y erróneo.  
 Si el código final debe ser otro, vendrán más tests que nos harán, poco a poco llegar a esa solución final y con sentido. Y si no vienen tests que nos hagan cambiar este código y nos sigue pareciendo que no vale, hay dos posibilidades:
 O bien no hemos definido suficientes tests para cubrir la especificación completamente y sin ambigüedades.
-O bien todavía no hemos cambiado el chip y no somos capaces de entregar un código que haga únicamente lo que tiene que hacer y no más.
-Toca el paso 3. Refactorización.
+O bien todavía no hemos cambiado el chip y no somos capaces de entregar un código que haga únicamente lo que tiene que hacer y no más.  
+</span>  
+
+
+**Toca el paso 3. Refactorización.**
  
-En este paso a veces no hay nada que hacer, a veces sí. Depende del estado del código y también de la experiencia de los programadores para detectar necesidades de refactorización.
-En la clase Cuenta no hay nada que refactorizar. Son las 3 líneas que el test necesita: el nombre de la clase, el nombre del método y que devuelva 0. Ya nos encontraremos situaciones en las que haya que refactorizar el código.
+En este paso a veces no hay nada que hacer, a veces sí. Depende del estado del código y también de la experiencia de los programadores para detectar necesidades de refactorización.  
+En la clase Cuenta no hay nada que refactorizar. Son las 3 líneas que el test necesita: _el nombre de la clase, el nombre del método y que devuelva 0_. Ya nos encontraremos situaciones en las que haya que refactorizar el código.
+```java
 public class Cuenta {
- 
 	public int getSaldo() {
 		return 0;
 	}
 }
- 
+``` 
 Y el test (no olvidemos que los test también se deben refactorizar) tampoco parece que se preste.
+```java
 class CuentaTest {
 	@Test
 	@DisplayName("Al crear una Cuenta el Saldo debe ser Cero")
@@ -412,20 +419,27 @@ class CuentaTest {
 		assertEquals(0, c.getSaldo());
 		}
 }
- 
-Podríamos refactorizar los nombres de los archivos, y consecuentemente las Clases si no hemos acertado con ello. A la primera los nombres suelen ser horribles.
-Si has refactorizado. Tengo que asegurarme de que no he roto nada. Vuelvo a ejecutar los tests.
-Perfecto. Hemos acabado con el primer test. Pasemos al segundo.
- 
-Segundo Test
-Vayamos con el segundo test. Revisa el listado de ejemplos que tenemos que convertir en tests
- 
-Ingresos.
-Al ingresar 100 en cuenta vacía el saldo es 100
+```
 
-Escribiendo el test
-Vemos que no quedan más tests de la primera funcionalidad: creación de una cuenta, Así que pasamos a la segunda (Funcionalidad de ingreso) y cogemos el primer ejemplo: Al ingresar 100 en cuenta vacía el saldo es 100.
+Podríamos refactorizar los nombres de los archivos, y consecuentemente las Clases si no hemos acertado con ello. A la primera los nombres suelen ser horribles.
+Si has refactorizado. Tengo que asegurarme de que no he roto nada. Vuelvo a ejecutar los tests.   
+
+Vemos que no quedan más tests de la primera funcionalidad: creación de una cuenta, 
+Perfecto. 
+Así que pasamos a la segunda (Funcionalidad de ingreso)
+Hemos acabado con el primer test. Pasemos al segundo.
+ 
+#### Segundo Test
+
+Vayamos con el segundo test. Revisa el listado de ejemplos que tenemos que convertir en tests.   
+ 
+**Ingresos**.
+- Al ingresar 100 en cuenta vacía el saldo es 100
+
+**Escribiendo el test**
+Tomamos el primer ejemplo: Al ingresar 100 en cuenta vacía el saldo es 100.   
 Convertimos el ejemplo en un test:
+```java
 	@Test
 	@DisplayName("Al ingresar 100 en Cuenta nueva el Saldo es 100")
 	void void AlIngresar100EnCuentaNuevaElSaldoEs100()
@@ -434,6 +448,7 @@ Convertimos el ejemplo en un test:
         c.ingreso(100);
         assertEquals(100, c.getSaldo());
     	}
+```
 
 He tenido que tomar otra decisión de diseño. Los ingresos se harán mediante un método ingreso() de la clase Cuenta, pasando la cantidad como parámetro.
 Ejecutar los tests, TODOS.
