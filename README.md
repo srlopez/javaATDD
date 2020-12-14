@@ -398,13 +398,12 @@ Arreglemoslo, no con un código super completo, y super funcional, sino, recorde
 Volvemos a ejecutar el test…  
 Y pasa. **Hemos acabado el segundo paso del algoritmo**.
 
-<div style="color:green">
+```diff
 Este es otro de los _chips_, que tenemos que cambiar para aplicar TDD. No pensar en soluciones fantásticas super funcionales... Nos limitamos a hacer lo que hay que hacer, y nada más, aunque parezca sin sentido y erróneo.  
 Si el código final debe ser otro, vendrán más tests que nos harán, poco a poco llegar a esa solución final y con sentido. Y si no vienen tests que nos hagan cambiar este código y nos sigue pareciendo que no vale, hay dos posibilidades:
 O bien no hemos definido suficientes tests para cubrir la especificación completamente y sin ambigüedades.
 O bien todavía no hemos cambiado el chip y no somos capaces de entregar un código que haga únicamente lo que tiene que hacer y no más.  
-</div>  
-
+```
 
 **Toca el paso 3. Refactorización.**
  
