@@ -4,7 +4,7 @@ Ideas de:
 - http://www.chuidiang.org/java/herramientas/test-automaticos/tdd-test-driven-development.php
 - https://phauer.com/2019/modern-best-practices-testing-java/
 - https://devs4j.com/2018/04/23/pruebas-unitarias-parte-2-junit-y-mockito-primeros-pasos/
-- https://github.com/carherco/curso-unit-testing-phpunit (Carlos Herrera)<- Principal
+- https://github.com/carherco/curso-unit-testing-phpunit (Carlos Herrera)<- Principal guía
 
 
 **INDICE**    
