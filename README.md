@@ -227,7 +227,7 @@ Antes es conveniente que se hayan ordenado por funcionalidad, agrupando todos lo
   8. Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
   9. Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0
   
-**Retiradas.**
+**Retiradas.** (no sigo numerando...)  
 - Restan la cantidad ingresada al saldo.
 - No hay comisiones ni nada por el estilo.
   - Al retirar 100 en cuenta con 500 el saldo es 400
