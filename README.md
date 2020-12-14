@@ -1,7 +1,5 @@
 # Introducción a ATDD (Acceptance Test Driven Development) y Junit5
 
->OJO! README.md NO FINALIZADO
-
 Ideas de:
 - http://www.chuidiang.org/java/herramientas/test-automaticos/tdd-test-driven-development.php
 - https://phauer.com/2019/modern-best-practices-testing-java/
@@ -9,40 +7,33 @@ Ideas de:
 - https://github.com/carherco/curso-unit-testing-phpunit (Carlos Herrera)<- Principal
 
 
-INDICE  por desarrollar   
+**INDICE**    
 
-TDD	1
-Objetivos del TDD	2
-Flujo de TDD	2
-Algoritmo TDD	2
-Patron AAA /// Given, When, Then	2
-Frameworks de testeo	2
-ATDD como Punto de partida para TDD	2
-Ejemplo ATDD	3
-Enunciado	3
-Propuesta de especificación	3
-Otras consideraciones	4
-Ejemplo Práctico ATDD	5
-SOLUCIÓN	5
-The List I	5
-The List II	6
-Recapitulamos	7
-Pongámonos ya manos al teclado	8
-Primer test	8
-Segundo Test	13
-Test #3	16
-Test #4	17
-Test #6	18
-Test #7, #8, #9, #10	19
-Los tests como parte de la documentación	22
-Test Driven Bug Fixing	22
-Test Driven Bug Fixing II	24
-Errores comunes en TDD	25
-ANTIPATRONES	27
-Ventajas y desventajas del TDD	29
+**Índice**   
+1. [TDD](#tdd)
+1. [Framework de Testeo](#fw)
+1. [ATDD](#atdd)
+1. [Ejemplo ATDD](#eatdd)
+1. [Práctica ATDD](#epatdd)
+1. [Ejemplo Test 1](#t1)
+1. [Ejemplo Test 2](#t2)
+1. [Ejemplo Test 3](#t3)
+1. [Ejemplo Test 4](#t4)
+1. [Ejemplo Test 5](#t5)
+1. [Ejemplo Test 6,7,8,9](#t6)
+1. [Test Drive Bug Fixing](#tdbf)
+1. [Test Drive Bug Fixing II](#tdbf2)
+1. [Errores Comunes](#errores)
+1. [Antipatrones](#anti)
+1. [Pro y Contra](#procon)
+1. [Niveles profesionales TDD](#pro)
 
 
-## TDD
+
+
+
+
+## TDD<a name="tdd"></a>
 Es una práctica de ingeniería de software que involucra otras dos prácticas: 
 - Escribir las pruebas primero (Test First Development) y 
 - Refactorización (Refactoring). 
@@ -75,7 +66,7 @@ Una prueba debe contener tres bloques que estén separados por una línea vacía
 - Then (Salida): Ejecutar aseveraciones para verificar la salida o el comportamiento correcto de la acción.
 
 
-## Frameworks de testeo 
+## Frameworks de testeo <a name="fw"></a>
 Permiten programar tests de manera muy sencilla.  
 Cada lenguaje de programación tiene uno o más frameworks profesionales de testeo.  
 Algunos de los más conocidos son: NUnit, xUnit, **JUnit**, PhpUnit, etc... 
@@ -89,14 +80,14 @@ pero con `assertEquals` podemos avanzar esta introducción.
 
 
 
-## ATDD como Punto de partida para TDD
+## ATDD como Punto de partida para TDD<a name="atdd"></a>
 - Son listados de ejemplos ejecutables 
 - Escritos por los dueños del producto (o al menos validados por ellos) 
 - Se centran en el qué y no en el cómo 
 - Ejemplos concretos y certeros 
 - Permiten comprobar muy rápido si el programa está cumpliendo los objetivos o no.
 
-## Ejemplo ATDD
+## Ejemplo ATDD<a name="eatdd"></a>
 Enunciado:
 > (...) Antes de proceder al pago, al cliente le saldrá un resumen detallado de los productos que tiene en la cesta,en los que se deberá aplicar el IVA (21%) o el RE (5.2%) al total, en caso de que el cliente requiera sus facturas con IVA o con RE.
 
@@ -157,7 +148,7 @@ Otras consideraciones:
 Otra ventaja de dirigir el desarrollo por los ejemplos, es que vamos a poder comprobar muy rápido si el programa está cumpliendo los objetivos o no. Conocemos en qué punto estamos y cómo vamos progresando. El Dueño de Producto puede revisar los tests de aceptación y ver cuántos se están cumpliendo, así que nuestro trabajo gana una confianza tremenda.
 
  
-## Ejemplo Práctico ATDD
+## Ejemplo Práctico ATDD<a name="epatdd"></a>
 Supongamos que un cliente nos contrata con este enunciado:
 > "Quiero lanzar una aplicación monedero para el pago entre amigos. Cada usuario tendrá una cuenta con saldo. La idea es que se puedan hacer transferencias a tus amigos directamente desde la app. La aplicación permitirá al usuario ingresar dinero o retirarlo cuando quiera."
 
@@ -271,7 +262,7 @@ Si nuestra aplicación pasa esos 20 chequeos, tanto nosotros como nuestro client
 
 Hacemos el Setup del Proyecto VSCODE con Java y añadiremos Pruebas unitarias lo que nos instalará el Framework JUnit. Lo personalizamos como hemos visto en clase.
 
-#### Primer test #1
+#### Primer test #1<a name="t1"></a>
 Empezaremos con la primera funcionalidad, con el primer test de la misma: 
 - Al crear cuenta el saldo es cero
 
@@ -440,7 +431,7 @@ Perfecto.
 Así que pasamos a la segunda (Funcionalidad de ingreso)
 Hemos acabado con el primer test. Pasemos al segundo.
  
-#### Segundo Test
+#### Segundo Test<a name="t2"></a>
 
 Vayamos con el segundo test. Revisa el listado de ejemplos que tenemos que convertir en tests.   
  
@@ -546,7 +537,7 @@ class CuentaTest {
  
 El código: **El visto arriba**
  
-#### Test #3: Al ingresar 3000 en cuenta vacía el saldo es 3000
+#### Test #3: Al ingresar 3000 en cuenta vacía el saldo es 3000 <a name="t3"></a>
 
 Sigamos con el siguiente test.
 El siguiente ejemplo de la lista ATDD es: _Al ingresar 3000 en cuenta vacía el saldo es 3000_
@@ -578,7 +569,7 @@ Somos conscientes de que está mucho mejor que hace un test, pero que todavía n
 Si hay más de una solución funcionalmente distinta que hace pasar los tests, es síntoma de que necesitamos más tests. Y los hay, por supuesto, así que lo dejamos así, y pasamos a la fase 3 del algoritmo: **refactorizar**.  
 No observamos nada que refactorizar, pasamos al siguiente test.
 
-#### Test #4: Al ingresar 3000 en cuenta con 100 el saldo es 3100
+#### Test #4: Al ingresar 3000 en cuenta con 100 el saldo es 3100<a name="t4"></a>
 
 El siguiente ejemplo de la lista ATDD es:
 - Al ingresar 3000 en cuenta con 100 el saldo es 3100  
@@ -636,7 +627,7 @@ A lo mejor hubiéramos preferido la solución con `setSaldo()` o la del parámet
 Hemos acabado con los tests de la especificaciones principal de la funcionalidad de ingreso.  
 Seguimos con el resto de especificaciones de dicha funcionalidad.
 
-#### Test #5: Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0
+#### Test #5: Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0 <a name="t5"></a>
 
 **Ingresos.**  
 ...
@@ -681,7 +672,7 @@ Voy a dejar este fallo como si no nos hubiéramos dado cuenta. En el futuro, en 
 No observamos nada que refactorizar, seguimos con el resto de casos
 
 
-#### Test #6, #7, #8, #9 - Categoría DECIMALES
+#### Test #6, #7, #8, #9 - Categoría DECIMALES <a name="t6"></a>
 
 ***Ingresos***
 - Los ingresos admiten un máximo de 2 decimales de precisión  
@@ -814,7 +805,7 @@ Ahora tocarían la de **retirada** y la de **transferencia**.
 - Para seguir el texto que continua debes tener los metodos de "transferencia" finalizados. y "validarCantidadTransferencia".
 ```
 
-## Test Driven Bug Fixing
+## Test Driven Bug Fixing<a name="tdbf"></a>
 
 Hace tiempo que acabamos el desarrollo de nuestra aplicación y está funcionando en producción sin problemas.   
 Pero un día llega nuestro cliente super preocupado. La aplicación no va. Dice que las transferencias no funcionan bien.  
@@ -886,7 +877,7 @@ Ejecutamos. ¡¡¡Pasa todos los tests!!!
 Todo correcto. Ya podemos subir el código a producción sin miedo. ;)
 
  
-#### Test Driven Bug Fixing II
+#### Test Driven Bug Fixing II<a name="tdbf2"></a>
 
 Hace tiempo que acabamos el desarrollo de nuestra aplicación y está funcionando en producción sin problemas.   
 Pero un día llega nuestro cliente super preocupado.   La aplicación no va. Dice que 
@@ -948,7 +939,7 @@ Ejecutamos. ¡¡¡Pasa todos los tests!!!
 **TDD - Paso 3: Refactorizamos (si es necesario)** y volvemos a comprobar que pasan todos los tests
 Todo correcto. Ya podemos subir el código a producción sin miedo.
 
-## Errores comunes en TDD
+## Errores comunes en TDD<a name="errores"></a>
  
 Empezar con TDD no es coser y cantar. A lo largo del proceso surgen muchas dudas y se cometen muchos errores.   
 A continuación enumero una pequeña lista de errores comunes al empezar con TDD.  
@@ -966,26 +957,26 @@ y no a esto:
 
 aunque no debemos ser estrictos con JUnit5 ya que podemos utilizar el `@DisplayNmae`.
 
-- Escribir demasiados tests de una vez
-La técnica establece que se debe escribir un test, y luego el código para hacerlo pasar. Luego otro test, y luego el código para hacerlo pasar... Siempre de uno en uno. De esta forma, al programar el código que debe pasar el test, nos aseguramos que cada decisión de diseño (de clases, métodos, relaciones entre clases, etc,) tomada en los tests es acertada, viable, válida...
-- Al coger práctica y experiencia con TDD, es bastante habitual escribir varios tests seguidos y luego el código que los hace pasar. Pero si escribimos decenas de tests seguidos, corremos el riesgo de acarrear malas decisiones de diseño que no hemos contrastado al escribir el código que los hace pasar.
-- Adopción parcial de TDD  
+- _Escribir demasiados tests de una vez_  
+La técnica establece que se debe escribir un test, y luego el código para hacerlo pasar. Luego otro test, y luego el código para hacerlo pasar... Siempre de uno en uno. De esta forma, al programar el código que debe pasar el test, nos aseguramos que cada decisión de diseño (de clases, métodos, relaciones entre clases, etc,) tomada en los tests es acertada, viable, válida...  
+Al coger práctica y experiencia con TDD, es bastante habitual escribir varios tests seguidos y luego el código que los hace pasar. Pero si escribimos decenas de tests seguidos, corremos el riesgo de acarrear malas decisiones de diseño que no hemos contrastado al escribir el código que los hace pasar.
+- _Adopción parcial de TDD_    
 A veces sucede, por diversos motivos, que no todos los desarrolladores del equipo usan TDD.   
 El proyecto fracasará con toda seguridad a menos que todo el equipo al completo esté aplicando TDD.
-- No sabemos qué es lo que queremos que haga el SUT (Subjet Under Test)
-- Nos hemos lanzado a escribir un test pero no sabemos en realidad qué es lo que el código bajo prueba tiene que hacer.  
+- _No sabemos qué es lo que queremos que haga el SUT_ (Subjet Under Test)  
+Nos hemos lanzado a escribir un test pero no sabemos en realidad qué es lo que el código bajo prueba tiene que hacer.  
 En algunas ocasiones, lo resolvemos hablando con el dueño del producto y, en otras, hablando con otros desarrolladores. Hay que tener en cuenta que se están tomando decisiones de diseño al escribir los tests por lo que las especificaciones tienen que estar muy claras antes de empezar para no acabar diseñando un software que no cumple las especificaciones.  
-- No sabemos quién es el SUT y quién es el colaborador
+- _No sabemos quién es el SUT y quién es el colaborador_  
 Es muy común que cuando necesitamos un colaborador, aquel que representamos mediante un doble (un mock, un stub...), para testear una funcionalidad del SUT, acabamos testeando al colaborador en lugar de al SUT.  MOCK y STUB están fuera de esta introducción.
 TAL VEZ para la siguiente evaluación.   
-- Un mismo método de test está haciendo múltiples afirmaciones.  
+- _Un mismo método de test está haciendo múltiples afirmaciones._    
 Cuando practicamos TDD correctamente, apenas tenemos que usar el depurador. Cuando un test falla, lo encontramos directamente y lo corregimos en dos minutos. Para que esto sea así, cada método debe probar una única funcionalidad del SUT. A veces utilizamos varias afirmaciones (`asserts`) en el mismo test, pero sólo si giran en torno a la misma funcionalidad. Un método de test raramente excede las 10 líneas de código.  
-- Se nos olvida refactorizar.  
+- _Se nos olvida refactorizar._  
 No sólo por tener una gran batería de tests, el código ya es más fácil de mantener. Si el código no está limpio, será muy costoso modificarlo, y también sus tests. No hay que olvidar buscar y corregir código duplicado después de hacer pasar cada test. El código de los tests debe estar tan limpio como el código de producción.  
-- No eliminamos código muerto.  
+- _No eliminamos código muerto._    
 A veces, tras cambios en las especificaciones, queda código en desuso. Puede ser código de producción o pueden ser tests. Puesto que normalmente disponemos de un sistema de control de versiones que nos permite volver atrás si alguna vez volviese a hacer falta el código, debemos eliminar todo código que creamos en desuso. El código muerto induce a errores antes o después. Se suele menospreciar cuando se trata de tests pero, como hemos hecho notar antes, el código de los tests es tan importante como el código que testean.
 
-## ANTIPATRONES
+## ANTIPATRONES<a name="anti"></a>
 
 James Carr (https://blog.james-carr.org/) recopiló una lista de antipatrones ayudado por la comunidad TDD.   
 Ese listado ya no está disponible en su blog, pero la comunidad de TDD mantiene un catálogo de antipatrones en stackoverflow:   
@@ -1042,7 +1033,7 @@ El código de los tests no se refactoriza tan cuidadosamente como el código de 
 - _El Inspector_  
 Viola la encapsulación en un intento de conseguir el 100 % de cobertura de código y por ello sabe tanto del objeto a prueba que, cualquier intento de refactorizarlo, rompe el test.
 
-### Ventajas y desventajas del TDD
+### Ventajas y desventajas del TDD<a name="procon"></a>
 
 #### Ventajas o beneficios
 - Cuando se utiliza TDD en un proyecto virgen, en raras ocasiones se tiene la necesidad de utilizar el depurador o debugger.  
@@ -1064,7 +1055,7 @@ Cuesta muchísimo trabajo encontrar en la literatura y en la bibliografía las d
  
 
 
-#### Los Niveles `rpfesionales en TDD
+#### Los Niveles `profesionales` en TDD<a name="pro"></a>
 o  ¿Puedo aplicar TDD con un equipo que no sea experto?
 
 
