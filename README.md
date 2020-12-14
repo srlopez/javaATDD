@@ -273,8 +273,8 @@ Empezaremos con la primera funcionalidad, con el primer test de la misma:
 ```
 
 Hay que testear que al crear una cuenta, el saldo es 0.  
-Escribe un test que cree una cuenta y haga un _assert_ para comprobar que el saldo es 0.
-En JUnit5 Utilizaremos la anotaciones de _@Test_ y _@DisplayName_
+Escribe un test que cree una cuenta y haga un `assert` para comprobar que el saldo es 0.
+En JUnit5 Utilizaremos la anotaciones de `@Test` y `@DisplayName`
 
 Decisiones: _package name_ para los test y el _core_ , _nombres para las clases_, etc. _nombre del test_, _nombre de la clase que alberga el test_. etc...
 
@@ -293,7 +293,7 @@ class CuentaTest {
 }
 ```
 
-Tras crear esa clase como **plantilla**, solamente hemos aplicado TDD en _el nombre del test_, que debe ser muy descriptivo, aunque ahora podemos utilizar el _@DisplayName_, todo lo demás forma parte de la elaboración de tests con JUnit.  
+Tras crear esa clase como **plantilla**, solamente hemos aplicado TDD en _el nombre del test_, que debe ser muy descriptivo, aunque ahora podemos utilizar el `@DisplayName`, todo lo demás forma parte de la elaboración de tests con JUnit.  
 Escribamos ahora el test. Según la especificación, el test debe:
 - Crear una cuenta
 - Comprobar que el saldo es 0  
@@ -320,7 +320,7 @@ Acabo de tomar varias decisiones de diseño:
         assertEquals(0, c.getSaldo());
     }
 ```
-Así pues, otra decisión: que la clase tenga un método _getSaldo()_
+Así pues, otra decisión: que la clase tenga un método `getSaldo()`
 
 ```diff
 + Escribiendo primero los tests, mi código está orientado a ser fácilmente utilizable. Como debe ser fácilmente utilizado por los tests (no me voy a complicar la vida escribiendo test) acabará siendo también fácil de utilizar por otros componentes de la aplicación.
@@ -330,12 +330,12 @@ El test ya está hecho, ya lo podemos probar. Evidentemente, no debemos esperar 
 Ya podemos pasar al **segundo paso del algoritmo: Escribir el código para que el test pase**.
  
 Concretamente, **el mínimo código necesario para que el test no falle**.
-EL primer impulso es empezar a programar según tenemos en nuestra cabeza (gracias a nuestra experiencia) cómo tiene que ser la clase _Cuenta_, con sus _getters_ y sus _setters_, _propiedades_, _constructor_, _métodos_... y seguro que al terminar, el test pasa. 
+EL primer impulso es empezar a programar según tenemos en nuestra cabeza (gracias a nuestra experiencia) cómo tiene que ser la clase `Cuenta`, con sus _getters_ y sus _setters_, _propiedades_, _constructor_, _métodos_... y seguro que al terminar, el test pasa. 
 
 Pero no es eso lo que dice TDD. **El código debe estar guiado por el test**. Por ahora el test ni arranca.  
 El test necesita que exista una clase Cuenta, así que vamos a crearla. Ahora toca pensar dónde crear esa clase. Por claridad la voy a ubicar en otro package:
 ```diff
-! !Ojo! No indico todo el código. Sólo lo que he cambiado.
+!Ojo! No indico todo el código. Sólo lo que he cambiado.
 ```
 ```java
 package app.core;
@@ -364,7 +364,7 @@ Volvemos a ejecutar el test:
 - java.lang.Error: Unresolved compilation problem: 
 -	The method getSaldo() is undefined for the type Cuenta
 ```
-Ahora el test nos dice que falta un método _getSaldo()_ en la clase _Cuenta_. Manos a la obra.  
+Ahora el test nos dice que falta un método `getSaldo()` en la clase `Cuenta`. Manos a la obra.  
 ```java
 public class Cuenta {
  
@@ -390,12 +390,12 @@ Arreglemoslo, no con un código super completo, y super funcional, sino, recorde
 Volvemos a ejecutar el test…  
 Y pasa. **Hemos acabado el segundo paso del algoritmo**.
 
-<span style="color:green">
+<div style="color:green">
 Este es otro de los _chips_, que tenemos que cambiar para aplicar TDD. No pensar en soluciones fantásticas super funcionales... Nos limitamos a hacer lo que hay que hacer, y nada más, aunque parezca sin sentido y erróneo.  
 Si el código final debe ser otro, vendrán más tests que nos harán, poco a poco llegar a esa solución final y con sentido. Y si no vienen tests que nos hagan cambiar este código y nos sigue pareciendo que no vale, hay dos posibilidades:
 O bien no hemos definido suficientes tests para cubrir la especificación completamente y sin ambigüedades.
 O bien todavía no hemos cambiado el chip y no somos capaces de entregar un código que haga únicamente lo que tiene que hacer y no más.  
-</span>  
+</div>  
 
 
 **Toca el paso 3. Refactorización.**
@@ -409,6 +409,7 @@ public class Cuenta {
 	}
 }
 ``` 
+
 Y el test (no olvidemos que los test también se deben refactorizar) tampoco parece que se preste.
 ```java
 class CuentaTest {
@@ -421,10 +422,10 @@ class CuentaTest {
 }
 ```
 
-Podríamos refactorizar los nombres de los archivos, y consecuentemente las Clases si no hemos acertado con ello. A la primera los nombres suelen ser horribles.
+Podríamos **REFACTORIZAR** los nombres de los archivos, y consecuentemente las clases si no hemos acertado con ello. A la primera los nombres suelen ser horribles.
 Si has refactorizado. Tengo que asegurarme de que no he roto nada. Vuelvo a ejecutar los tests.   
 
-Vemos que no quedan más tests de la primera funcionalidad: creación de una cuenta, 
+Vemos que no quedan más tests de la **primera funcionalidad**: creación de una cuenta, 
 Perfecto. 
 Así que pasamos a la segunda (Funcionalidad de ingreso)
 Hemos acabado con el primer test. Pasemos al segundo.
@@ -437,7 +438,10 @@ Vayamos con el segundo test. Revisa el listado de ejemplos que tenemos que conve
 - Al ingresar 100 en cuenta vacía el saldo es 100
 
 **Escribiendo el test**
-Tomamos el primer ejemplo: Al ingresar 100 en cuenta vacía el saldo es 100.   
+
+Tomamos el primer ejemplo: 
+- Al ingresar 100 en cuenta vacía el saldo es 100.
+
 Convertimos el ejemplo en un test:
 ```java
 	@Test
@@ -450,40 +454,45 @@ Convertimos el ejemplo en un test:
     	}
 ```
 
-He tenido que tomar otra decisión de diseño. Los ingresos se harán mediante un método ingreso() de la clase Cuenta, pasando la cantidad como parámetro.
-Ejecutar los tests, TODOS.
-El primero pasa, lógicamente, pero el segundo falla:
-A veces pasa que escribimos un test nuevo, que debe fallar y no falla. Esto tiene alguna de estas tres posibles causas:
-O bien nos hemos equivocado escribiendo el test. Pensamos que está testeando una cosa pero está testeando otra cosa totalmente diferente (cosas del copy-paste, o se nos ha olvidado el assert, o un bug en el test, que le puede pasar a cualquiera).
-O bien el nuevo test no aporta ninguna funcionalidad nueva, con lo que es un test innecesario.
-O bien, al programar el código que debía pasar los test anteriores, hemos programado más código y más funcionalidades de las necesarias.
-Sea como sea, el fallo es nuestro y debemos identificarlo para proseguir correctamente:
-Reescribiendo el test.
-Descartando el test actual y pasando al siguiente.
-Dejando el test como está, el código como está y pasando al siguiente test.
-Como en nuestro caso el test falla, pasamos al segundo paso del algoritmo. Escribir el código para que el test pase.
-Escribamos el mínimo código necesario para que el test pase, sin romper los anteriores, claro.
-Creo un método ingreso con un parámetro, porque me lo pide el test. Y siendo muy descuidado y muy torpe, hago que getSaldo devuelva 100 para que mi test pase
+He tenido que tomar otra decisión de diseño. Los ingresos se harán mediante un método `ingreso()` de la clase `Cuenta`, pasando la cantidad como parámetro.  
 
+¡¡¡¡Ejecutamos los tests, **TODOS**!!!!.  
+
+El primero pasa, lógicamente, pero el segundo falla:
+A veces pasa que escribimos un test nuevo, que debe fallar y no falla. Esto tiene alguna de estas tres posibles causas:  
+ - O bien **nos hemos equivocado** escribiendo el test. Pensamos que está testeando una cosa pero está testeando otra cosa totalmente diferente (cosas del copy-paste, o se nos ha olvidado el `assert`, o un bug en el test, que le puede pasar a cualquiera).
+- O bien el nuevo test **no aporta ninguna funcionalidad nueva**, con lo que es un test innecesario.
+- O bien, al programar el código que debía pasar los test anteriores, **hemos programado más código y más funcionalidades** de las necesarias.
+
+Sea como sea, el fallo es nuestro y debemos identificarlo para proseguir correctamente:
+
+**Reescribiendo el test.**  
+Descartando el test actual y pasando al siguiente.  
+Dejando el test como está, el código como está y pasando al siguiente test.  
+Como en nuestro caso el test falla, pasamos al segundo paso del algoritmo. Escribir el código para que el test pase.  
+```diff
++ Escribamos el mínimo código necesario para que el test pase, sin romper los anteriores, claro.  
+```
+Creo un método ingreso con un parámetro, porque me lo pide el test. Y siendo muy descuidado y muy torpe, hago que `getSaldo()` devuelva 100 para que mi test pase.
+```java
 public class Cuenta {
- 
 	public int getSaldo() {
 		return 100;
 	}
 	public void ingreso(int cantidad){
 	}
- 
 }
+```
 
-Ejecuto, y me encuentro con la sorpresa de que al programar mi funcionalidad he roto otras. No es realmente una pérdida de tiempo por torpeza, o por desconocimiento (es posible que yo acabe de retomar un trabajo que dejó otro programador). Sea como sea, todos los test que acaban de fallar revelan las dependencias o relaciones de mi ejemplo con otros ejemplos.
-La funcionalidad Al ingresar 100 en cuenta vacía el saldo es 100 está ligada con Al crear cuenta el saldo es cero de forma que ahora tengo en la cabeza más pistas para escribir un código que pase todos los tests.
-Según los tests el método getSaldo() si se llama después de llamar a ingreso(), devuelve una cosa, pero si se llama a getSaldo() sin haber llamado previamente a ingreso() devuelve otra. Así que necesito algún tipo de "memoria/indicador" en la clase, como un atributo.
-
+Ejecuto, y me encuentro con la sorpresa de que al programar mi funcionalidad **he roto otras**. No es realmente una pérdida de tiempo por torpeza, o por desconocimiento (es posible que yo acabe de retomar un trabajo que dejó otro programador). Sea como sea, todos los test que acaban de fallar revelan las dependencias o relaciones de mi ejemplo con otros ejemplos.  
+La funcionalidad Al ingresar 100 en cuenta vacía el saldo es 100 está ligada con _'Al crear cuenta el saldo es cero'_ de forma que ahora tengo en la cabeza más pistas para escribir un código que pase todos los tests.  
+Según los tests el método `getSaldo()` si se llama después de llamar a `ingreso()`, devuelve una cosa, pero si se llama a `getSaldo()` sin haber llamado previamente a `ingreso()` devuelve otra. Así que necesito algún tipo de **"memoria/indicador"** en la clase, como un atributo.
+```java
 public class Cuenta {
  
 	private int saldo;
 	
-	public Cuenta() { this.saldo=0;}
+	public Cuenta() { this.saldo=0; }
 	
 	public int getSaldo() {
 		return this.saldo;
@@ -492,14 +501,20 @@ public class Cuenta {
 	public void ingreso(int cantidad){
         this.saldo = 100;
 	}
- 
 }
+```
 
-El método getSaldo() ya es exactamente como hubiéramos programado desde el principio, pero ese this.saldo = 100;, es horroroso, está mal. Pues no, está perfecto. Ejecuto los tests y pasan ambos.
-Ya vendrán otros tests que lo arreglaran, y si no, deberíamos alertar a quien elaboró los ejemplos, para que revise si faltan (le podemos proponer ejemplos sabemos que fallarían), y si no, si somos tan inexpertos que se nos pasa esto, ya vendrá el cliente y dirá: "La aplicación falla: ingreses lo que ingreses, el saldo se queda siempre en 100" y haremos un ejemplo de que si ingresas 300 el saldo debe ser 300 y su test correspondiente y su código correspondiente.
+El método `getSaldo()` ya es exactamente como hubiéramos programado desde el principio, pero ese `this.saldo = 100;` , es horroroso, está mal. Pues no, está perfecto. Ejecuto los tests y pasan ambos.  
+
+```diff
+- Ya vendrán otros tests que lo arreglaran, y si no, deberíamos alertar a quien elaboró los ejemplos, para que revise si faltan (le podemos proponer ejemplos sabemos que fallarían), y si no, si somos tan inexpertos que se nos pasa esto, ya vendrá el cliente y dirá: _La aplicación falla: ingreses lo que ingreses, el saldo se queda siempre en 100_ y haremos un ejemplo de que si ingresas 300 el saldo debe ser 300 y su test correspondiente y su código correspondiente.
+```
+
 Pero con estos dos tests, el código tal cual está, está perfecto.
 En este caso no vemos nada que refactorizar ni en el código ni en los tests.
 Los tests:
+
+```java
 class CuentaTest {
  
 	@Test
@@ -519,54 +534,63 @@ class CuentaTest {
     }
  
 }
+``` 
  
+El código: **El visto arriba**
  
-El código:
-El visto arriba
- 
-Test #3
+#### Test #3: Al ingresar 3000 en cuenta vacía el saldo es 3000
+
 Sigamos con el siguiente test.
-El siguiente ejemplo de la lista ATDD es:
-Al ingresar 3000 en cuenta vacía el saldo es 3000
+El siguiente ejemplo de la lista ATDD es: _Al ingresar 3000 en cuenta vacía el saldo es 3000_
 Convertimos el ejemplo en un test:
  
- 
-@Test
+```java 
+    @Test
 	@DisplayName("Al ingresar 3000 en Cuenta nueva el Saldo es 3000")
 	void AlIngresar3000EnCuentaNuevaElSaldoEs3000()
     {
         Cuenta c = new Cuenta();
         c.ingreso(3000);
-        assertEquals(300, c.getSaldo());
+        assertEquals(3000, c.getSaldo());
     }
+```
  
-A primera vista, es lo mismo que el test anterior, pero con otra cantidad, parece que no aporta funcionalidad. Pero si ejecutamos el test, falla, así que sí, algo de funcionalidad nueva debe aportar.
-Mirando este test y el anterior vemos que el método ingreso NO devuelve siempre lo mismo. Con este ejemplo se ha eliminado ambigüedad al método ingreso (aunque todavía no se ha eliminado el 100% de ambigüedad, como veremos).
-Volviendo al tema, tenemos un método getSaldo() que devuelve 100 cuando al método ingreso() le pasamos 100 como parámetro y devuelve 3000 cuando al método ingreso le pasamos 3000 como parámetro. Y devuelve 0 si NO se llama al método ingreso(). Pues está clarísimo.
-...
- 
+A primera vista, es lo mismo que el test anterior, pero con otra cantidad, parece que no aporta funcionalidad. Pero si ejecutamos el test, **falla**, así que sí, algo de funcionalidad nueva debe aportar.  
+
+Mirando este test y el anterior vemos que el método ingreso NO devuelve siempre lo mismo. Con este ejemplo se ha eliminado ambigüedad al método ingreso (aunque todavía no se ha eliminado el 100% de ambigüedad, como veremos).  
+Volviendo al tema, tenemos un método `getSaldo()` que devuelve 100 cuando al método `ingreso()` le pasamos 100 como parámetro y devuelve 3000 cuando al método ingreso le pasamos 3000 como parámetro. Y devuelve 0 si NO se llama al método `ingreso()`. Pues está clarísimo.
+
+```java
     public void ingreso(cantidad){
         this.saldo = cantidad;
     }
+```
  
- 
-Ejecutamos los tests, y pasan. Somos conscientes de que está mucho mejor que hace un test, pero que todavía no es la solución final, que ingreso tiene que sumar cantidad a lo que hubiera, pero hasta ahora no nos hemos encontrado ningún tests que nos lo exija.
-Si hay más de 1 solución funcionalmente distinta que hace pasar los tests, es síntoma de que necesitamos más tests. Y los hay, por supuesto, así que lo dejamos así, y pasamos a la fase 3 del algoritmo: refactorizar.
+Ejecutamos los tests, y pasan.  
+Somos conscientes de que está mucho mejor que hace un test, pero que todavía no es la solución final, que ingreso tiene que sumar cantidad a lo que hubiera, pero hasta ahora no nos hemos encontrado ningún tests que nos lo exija.  
+Si hay más de una solución funcionalmente distinta que hace pasar los tests, es síntoma de que necesitamos más tests. Y los hay, por supuesto, así que lo dejamos así, y pasamos a la fase 3 del algoritmo: **refactorizar**.  
 No observamos nada que refactorizar, pasamos al siguiente test.
-Test #4
+
+#### Test #4: Al ingresar 3000 en cuenta con 100 el saldo es 3100
+
 El siguiente ejemplo de la lista ATDD es:
-Al ingresar 3000 en cuenta con 100 el saldo es 3100
+- Al ingresar 3000 en cuenta con 100 el saldo es 3100  
+
 Esto resuelve la ambigüedad que nos quedaba: las cantidades que se ingresan, se van acumulando.
 Convertimos el ejemplo en un test.
-Hasta ahora, necesitábamos una cuenta vacía, virgen, y nos bastaba con new Cuenta().
-Ahora necesitamos una cuenta con saldo 100. Tenemos que pensar cómo hacer que una cuenta tenga saldo 100. Volvemos a tener que tomar una decisión de diseño.
-Varias opciones:
-Un nuevo método: setSaldo().
-Utilizar el método ingreso ya existente.
-Usar un parámetro en el constructor para indicar el saldo inicial.
-Yo no me quiero complicar si no hay tests que me lo exijan. Así que me quedo con el método ingreso().
 
-@Test
+Hasta ahora, necesitábamos una cuenta vacía, virgen, y nos bastaba con `new Cuenta()`.  
+Ahora necesitamos una cuenta con saldo 100. Tenemos que pensar cómo hacer que una cuenta tenga saldo 100. Volvemos a tener que tomar una decisión de diseño.  
+
+Varias opciones:
+- Un nuevo método: setSaldo().
+- Utilizar el método ingreso ya existente.
+- Usar un parámetro en el constructor para indicar el saldo inicial.
+
+No me quiero complicar si no hay tests que me lo exijan. Así que me quedo con el método `ingreso()`.
+
+```java
+    @Test
 	@DisplayName("Al ingresar 3000 en Cuenta con 100 el Saldo es 3100")
 	 void AlIngresar3000EnCuentaCon100ElSaldoEs3100()
 	    {
@@ -575,10 +599,14 @@ Yo no me quiero complicar si no hay tests que me lo exijan. Así que me quedo co
 	        c.ingreso(3000);
 	        assertEquals(3100, c.getSaldo());
 	    }
+```
 
-Ejecutamos los test. Falla este último, perfecto. Paso 1 terminado.
-Paso 2: Escribimos código para que no falle el test.
-=========================================================
+Ejecutamos los test. 
+Falla este último, perfecto.   
+Paso 1: Terminado.  
+Paso 2: Escribimos código para que no falle el test.  
+
+```java
 public class Cuenta {
  
 	private int saldo;
@@ -592,23 +620,25 @@ public class Cuenta {
 	public void ingreso(int cantidad){
         this.saldo += cantidad;
 	}
- 
 }
-
+```
 
 
 Ejecutamos los tests, y pasan.
 Además ya estamos tranquilos porque el código ahora es como nuestro sentido común decía que tenía que ser.
-A lo mejor hubiéramos preferido la solución con setSaldo() o la del parámetro en el constructor. No pasa nada, Sería un código un poquito más grande, pero igualmente robusto.
+A lo mejor hubiéramos preferido la solución con `setSaldo()` o la del parámetro en el constructor. No pasa nada, Sería un código un poquito más grande, pero igualmente robusto.
 Hemos acabado con los tests de la especificaciones principal de la funcionalidad de ingreso.
 Seguimos con el resto de especificaciones de dicha funcionalidad.
-Test #6
+
+#### Test #6
+
 Ingresos.(...)
 No se pueden hacer ingresos negativos
 Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0
 (...)
 Convertimos el ejemplo en un test:
-@Test
+```java
+    @Test
 	@DisplayName("No se puede ingresar Cantidad Negativa")
 	 void NoSePuedeIngresarCantidadNegativa()
 	    {
@@ -616,26 +646,29 @@ Convertimos el ejemplo en un test:
 	        c.ingreso(-100);
 	        assertEquals(3100, c.getSaldo());
 	    }
+```
 
 Los nombres de los tests, mejor la especificación que el ejemplo en sí.
 El test falla. Paso 2, escribir el código:
- 
+
+``` 
 public void ingreso(float cantidad){
  	 if(cantidad < 0){
             this.saldo = 0;
         } else {
             this.saldo += cantidad;
         }
- 
- 
 	}
- 
+```
+
 Pasa los tests. Ese this.saldo = 0; chirría, debería venir algún test para quitar esa ambigüedad, pero si echamos un vistazo, no lo hay. Deberíamos entonces avisar de que faltan ejemplos en las especificaciones para que sea del todo robusto.
 ¿Por qué no lo programamos bien directamente (al fin y al cabo sabemos cómo debe ser) y nos olvidamos?
 La respuesta es que si no tenemos una batería de test completa, en el futuro alguien puede hacer cambios en el código, refactorizaciones, etc, y podría volver a introducir el this.saldo = 0;, ejecutar los tests, ver que pasan todos, y dar por bueno ese código. Si aplicamos TDD hay que conseguir una batería de tests que no dejan cabida a la ambigüedad. Esto se consigue con experiencia, y sobretodo, sin programar más funcionalidad de la que pida cada test.
 Voy a dejar este fallo como si no nos hubiéramos dado cuenta. En el futuro, en producción, el cliente lo detectará y tendremos un bug que corregir. Y lo corregiremos siguiendo la técnica TDD.
 No observamos nada que refactorizar, seguimos con el resto de casos:
-Test #7, #8, #9, #10
+
+
+#### Test #7, #8, #9, #10
 
 Seguimos
 Ingresos. (...)
@@ -646,7 +679,9 @@ La cantidad máxima que se puede ingresar es de 6000
 Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
 Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0
 Tests
-@Test
+
+```java
+    @Test
 	@DisplayName("Ingreso Cantidad con 2 Decimales")
 	 void IngresoCantidad2Decimales()
 	    {
@@ -654,6 +689,7 @@ Tests
 	        c.ingreso(100.45);
 	        assertEquals(100.45, c.getSaldo());
 	    }
+```
 
 Ejecuto el test y... falla. El paso 1 de TDD dice que tengo que escribir un test que falle.
 Ojo! Con un Lenguaje de Tipado dinámico puede no fallar, ya que no haría distinción entre enteros y decimales. Java y la mayoría de lenguajes de tipado estático obliga con este test a ir al código y cambiar el tipo de dato de int a float.
@@ -665,6 +701,7 @@ Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
 Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
 Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0
 Tests
+```java
    @Test
    @DisplayName("Ingreso de Cantidad de más de 2 Decimales No EsValido")
    void IngresoCantidadMasDe2DecimalesNoEsValido(){
@@ -689,8 +726,9 @@ Tests
         assertEquals(0, c.getSaldo());
     }
  
-    
+```    
 Código final
+```java
 public class Cuenta {
  
 	private floatsaldo;
@@ -709,11 +747,12 @@ public class Cuenta {
         }
 	}
 }
-
+```
 
 Paso 2, los tests pasan.
 Paso 3. Refactorizar. La función ingreso() empieza a tener más líneas de control que de lo que realmente hace. Me pide refactorizar. Voy a crear un método privado de validación
-    
+
+```java    
     public void ingreso(float cantidad){
         bool esValida = this.validarCantidadIngresada(cantidad);
         if(esValida){ 
@@ -738,7 +777,7 @@ Paso 3. Refactorizar. La función ingreso() empieza a tener más líneas de cont
         
         return true;
     }
-
+```
 
 Vuelvo a ejecutar los tests. ¡¡¡Y pasan!!! Mi código hace exactamente lo mismo que antes. TDD da una seguridad muy grande a la hora de afrontar cambios o refactorizaciones.
  
@@ -750,7 +789,8 @@ Ya hemos acabado con la funcionalidad de ingreso.
 Ahora tocarían la de retirada y la de transferencia.
 Turno de la familia 1daw3
 
-Test Driven Bug Fixing
+## Test Driven Bug Fixing
+
 Hace tiempo que acabamos el desarrollo de nuestra aplicación y está funcionando en producción sin problemas.
 Pero un día llega nuestro cliente super preocupado. La aplicación no va. Dice que las transferencias no funcionan bien.
 Como bien sabemos por experiencia, para poder corregir un bug, necesitamos reproducirlo. Así, que le pedimos al cliente que nos diga cómo ha sido alguno de los casos en los que ha ocurrido el fallo.
@@ -767,6 +807,7 @@ Lo primero es verificar con el cliente qué debe hacer exactamente la aplicació
 Hemos vuelto a hacer ATDD y ya tenemos un ejemplo concreto para convertirlo en un test.
 TDD - Paso 1. Escribimos el test.
 
+```java
     public void NoSePuedeTransferirMasSaldoDelDisponible(){
         cuenta1 = new Cuenta();
         cuenta1ingreso(2350);
@@ -779,14 +820,13 @@ TDD - Paso 1. Escribimos el test.
         assertEquals(2350, cuenta1getSaldo());
         assertEquals(300, cuenta2->getSaldo());
     }
-
+```
 
 Ejecutamos. El test falla. Precisamente ocurre lo que el usuario ha reportado que ocurre: al emisor no se le descuenta ninguna cantidad, pero al receptor sí que se le ingresa la cantidad.
 "Test Driven Bug Fixing" nos da la seguridad de estar reproduciendo exactamente el fallo que hay que corregir, y al ejecutar el test, ver que realmente falla. ¡No tenemos ni que utilizar la aplicación para comprobarlo!
 TDD - Paso 2. Hacer que el test Pase.
 src\app\core\Cuenta.java
-
-    
+```java    
     private void validarCantidadTransferencia(cantidad){        
         if(cantidad < 0) {
             return false;
@@ -804,14 +844,15 @@ src\app\core\Cuenta.java
     }
 
 }
-
+```
 
 Ejecutamos. ¡¡¡Pasa todos los tests!!!
 TDD - Paso 3: Refactorizamos (si es necesario) y volvemos a comprobar que pasan todos los tests
 Todo correcto. Ya podemos subir el código a producción sin miedo.
 
  
-Test Driven Bug Fixing II
+#### Test Driven Bug Fixing II
+
 Hace tiempo que acabamos el desarrollo de nuestra aplicación y está funcionando en producción sin problemas.
 Pero un día llega nuestro cliente super preocupado. La aplicación no va. Dice que a algunos usuarios les deja sin saldo.
 Como bien sabemos por experiencia, para poder corregir un bug, necesitamos reproducirlo. Así, que le pedimos al cliente que nos diga cómo ha sido alguno de los casos en los que ha ocurrido el fallo.
@@ -826,9 +867,9 @@ Lo primero es verificar con el cliente qué debe hacer exactamente la aplicació
 "De acuerdo".
 Hemos vuelto a hacer ATDD y ya tenemos un ejemplo concreto para convertirlo en un test.
 TDD - Paso 1. Escribimos el test.
-
+```java
     public void IngresoMasDe6000NoEsValidoAlIngresar7000EnCuentaCon2350ElSaldoSeQuedaEn2350(){
-        Arrange
+        //Arrange
         Cuenta c = new Cuenta();
         c.ingreso(2350);
         
@@ -838,14 +879,13 @@ TDD - Paso 1. Escribimos el test.
         //Asert
         assertEquals(2350, c.getSaldo());
     }
-
+```
 
 Ejecutamos. El test falla. Precisamente ocurre lo que el usuario ha reportado que ocurre: su saldo se queda a 0.
 "Test Driven Bug Fixing" nos da la seguridad de estar reproduciendo exactamente el fallo que hay que corregir, y al ejecutar el test, ver que realmente falla. ¡No tenemos ni que utilizar la aplicación para comprobarlo!
 TDD - Paso 2. Hacer que el test Pase.
 src\app\core\Cuenta.java
-
-    
+```java
     public void ingreso(cantidad){
         esValida = this.validarCantidadIngresada(cantidad);
         if(esValida){ 
@@ -854,14 +894,14 @@ src\app\core\Cuenta.java
     }
 
 }
-
+```
 
 Ejecutamos. ¡¡¡Pasa todos los tests!!!
 TDD - Paso 3: Refactorizamos (si es necesario) y volvemos a comprobar que pasan todos los tests
 Todo correcto. Ya podemos subir el código a producción sin miedo.
 
 
-Errores comunes en TDD
+## Errores comunes en TDD
  
 Empezar con TDD no es coser y cantar. A lo largo del proceso surgen muchas dudas y se cometen muchos errores.
 A continuación enumero una pequeña lista de errores comunes al empezar con TDD.
@@ -894,7 +934,7 @@ No sólo por tener una gran batería de tests, el código ya es más fácil de m
 No eliminamos código muerto
 A veces, tras cambios en las especificaciones, queda código en desuso. Puede ser código de producción o pueden ser tests. Puesto que normalmente disponemos de un sistema de control de versiones que nos permite volver atrás si alguna vez volviese a hacer falta el código, debemos eliminar todo código que creamos en desuso. El código muerto induce a errores antes o después. Se suele menospreciar cuando se trata de tests pero, como hemos hecho notar antes, el código de los tests es tan importante como el código que testean.
 
-ANTIPATRONES
+## ANTIPATRONES
 
 James Carr (https://blog.james-carr.org/) recopiló una lista de antipatrones ayudado por la comunidad TDD.
 Ese listado ya no está disponible en su blog, pero la comunidad de TDD mantiene un catálogo de antipatrones en stackoverflow:
