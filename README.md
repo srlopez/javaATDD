@@ -9,6 +9,7 @@ Ideas de:
 - https://github.com/carherco/curso-unit-testing-phpunit
 
 
+INDICE  por desarrollar   
 
 TDD	1
 Objetivos del TDD	2
@@ -109,7 +110,7 @@ Si un cliente con IVA y con RE elige un producto de 100€, en el detalle de la 
 ▸ Total: 126.20€ 
 
 
- **Propuestas (a la izda) y Rectificaciónes del cliente (a la dcha).
+**Propuestas (a la izda) y Rectificaciónes del cliente (a la dcha).**
 
 Cliente con IVA y con RE: | Cliente con IVA y con RE:
 --|--
@@ -143,8 +144,6 @@ Cliente sin IVA y sin RE: | Cliente sin IVA y sin RE:
 
 **VB (Visto Bueno Cliente)**
 
-
-
 Genial. Ya tenemos 4 tests de aceptación para la funcionalidad de "mostrar los impuestos en el resumen de la factura". 
 Otras consideraciones:  
 Otra ventaja de dirigir el desarrollo por los ejemplos, es que vamos a poder comprobar muy rápido si el programa está cumpliendo los objetivos o no. Conocemos en qué punto estamos y cómo vamos progresando. El Dueño de Producto puede revisar los tests de aceptación y ver cuántos se están cumpliendo, así que nuestro trabajo gana una confianza tremenda.
@@ -154,10 +153,15 @@ Otra ventaja de dirigir el desarrollo por los ejemplos, es que vamos a poder com
 Supongamos que un cliente nos contrata con este enunciado:
 > "Quiero lanzar una aplicación monedero para el pago entre amigos. Cada usuario tendrá una cuenta con saldo. La idea es que se puedan hacer transferencias a tus amigos directamente desde la app. La aplicación permitirá al usuario ingresar dinero o retirarlo cuando quiera."
 
-Aunque parece bastante claro, hay muchos detalles no especificados. No se puede aplicar TDD si no tenemos ejemplos concretos y certeros. Imaginémonos que tenemos la oportunidad de entrevistarnos con el cliente para detallar mejor la aplicación. Nuestra tarea es obtener un listado de especificaciones ATDD. Es decir, un listado de ejemplos concretos y certeros, checkeable, y que cubra todas las posibilidades para que no haya lugar a malinterpretaciones de ningún tipo sobre las funcionalidades.  
+Aunque parece bastante claro, hay muchos detalles no especificados. No se puede aplicar TDD si no tenemos **ejemplos concretos y certeros**. Imaginémonos que tenemos la oportunidad de entrevistarnos con el cliente para detallar mejor la aplicación. Nuestra tarea es obtener un listado de **especificaciones ATDD**. Es decir, un listado de **ejemplos concretos y certeros, checkeable**, y que cubra todas las posibilidades para que no haya lugar a malinterpretaciones de ningún tipo sobre las funcionalidades.  
 Evidentemente, los detalles los conoce el cliente, y no nosotros, así que para este ejercicio, nosotros mismos haremos también de cliente, dialogando con nosotros mismos hasta tener la lista de especificaciones ATDD completa.  
 
-Dedicadle un buen rato a completar la lista antes de continuar. 
+```diff
++ PRÁCTICA:
++ Dedicadle un buen rato a completar la lista antes de continuar.
+! Aquí entra todo lo que hemos aprendido sobre cómo definir Clases en Java, métodos y propiedades.
+```
+
 ### SOLUCIÓN
 Esta lista, evidentemente no coincidirá con la vuestra porque el cliente no es el mismo que el vuestro, así que los requisitos de la aplicación del cliente no coinciden con los de la aplicación de vuestro cliente.
 Pero el objetivo realmente es ver si somos capaces de llegar a elaborar un lista de ejemplos válidos para utilizar la técnica TDD.
@@ -239,82 +243,110 @@ Antes es conveniente que se hayan ordenado por funcionalidad, agrupando todos lo
   - Al hacer una transferencia de 3000.01 desde una cuenta con 3500 a una con 50, en la primera cuenta el saldo se quedará en 3500 y en la segunda se quedará en 50.
   - Al hacer una transferencia de 2000 desde una cuenta con 3500 a una con 50, y justo después otra de 1200, en la primera cuenta el saldo se quedará en 1500 y en la segunda se quedará en 2050.
 
-Y ahora sí, hemos acabado de capturar las especificaciones. Con esto ya podemos empezar a escribir tests y a programar siguiendo el algoritmo TDD visto con anterioridad. Cada ejemplo marcado en negrita, se convertirá en un test que habrá que pasar posteriormente.
+Y ahora **sí**, hemos acabado de capturar **las especificaciones**. Con esto ya podemos empezar a escribir tests y a programar siguiendo el **algoritmo TDD** visto con anterioridad. Cada ejemplo marcado en negrita, se convertirá en un test que habrá que pasar posteriormente.
 
 **Recapitulamos**
 
-Vamos a partir de una parte de las especificaciones obtenidas mediante ATDD en la list II  
+Vamos a partir de una parte de las especificaciones obtenidas mediante ATDD en la nueva list II  
 Recordemos que estos ejemplos, 20 en total más o menos, se habían sacado a partir de apenas 1 párrafo de las especificaciones inicial
 
 >"Quiero lanzar una aplicación monedero para el pago entre amigos. Cada usuario tendrá una cuenta con saldo. La idea es que se puedan hacer transferencias a tus amigos directamente desde la app. La aplicación permitirá al usuario ingresar dinero o retirarlo cuando quiera."
 
-Profundizando en la entrevista con el cliente, obtuvimos unas especificaciones basadas en ejemplos concisos y concretos que:
-Evitarán que tengamos que tomar ninguna decisión sobre el modelo de negocio.
-Nos darán confianza plena para tomar todas las decisiones de diseño necesarias durante la elaboración de los tests.
-Además, permitirán también tanto al cliente como a nosotros mismos tener el mismo Listado de tests de aceptación. 
-Si nuestra aplicación pasa esos 20 chequeos, tanto nosotros como nuestro cliente daremos por buena la implementación de las 4 funcionalidades: Creación de cuentas, ingresos, retiradas y transferencias.
-Pongámonos ya manos al teclado
+Profundizando en la entrevista con el cliente, obtuvimos unas especificaciones basadas en **ejemplos concisos y concretos** que:
+- Evitarán que tengamos que tomar ninguna decisión sobre el modelo de negocio.
+- Nos darán confianza plena para tomar todas las decisiones de diseño necesarias durante la elaboración de los tests.
+- Además, permitirán también tanto al cliente como a nosotros mismos tener el mismo Listado de tests de aceptación. 
 
-Hacemos el Setup del Proyecto Java y añadiremos Pruebas unitarias lo que nos instalará el Framework JUnit.
-Primer test
+Si nuestra aplicación pasa esos 20 chequeos, tanto nosotros como nuestro cliente **daremos por buena la implementación** de las 4 funcionalidades: _Creación de cuentas, ingresos, retiradas y transferencias_.
+
+### Pongámonos ya manos al teclado
+
+Hacemos el Setup del Proyecto VSCODE con Java y añadiremos Pruebas unitarias lo que nos instalará el Framework JUnit. Lo personalizamos como hemos visto en clase.
+
+#### Primer test
 Empezaremos con la primera funcionalidad, con el primer test de la misma: 
-Al crear cuenta el saldo es cero
-Socks: Enfrentarse a la escritura del primer test es una experiencia muy curiosa que nos encontramos al aventurarnos en el mundo del TDD. No tenemos nada, ni clases, ni métodos, ni nombres de archivos, pero tenemos que escribir un test que utilice todo eso que no existe. Esto no tiene sentido, es como empezar por el final.
-Efectivamente, es lo que vimos en la definición de TDD y en cómo es el flujo de trabajo, primero el test, luego el código. Es chocante, pero una vez cambiado el chip, las cosas fluyen, y hasta alguno se divierte.
-Hay que testear que al crear una cuenta, el saldo es 0. Escribe un test que cree una cuenta y haga un assert para comprobar que el saldo es 0.
-En JUnit Utilizaremos la anotaciones de @Test y @DisplayName
-Decisiones: ‘package name’ para los test, nombres para las clases, etc. nombre del test, nombre de la clase que alberga el test. etc...
+- Al crear cuenta el saldo es cero
+```diff
+-Shock!!!!
+- Enfrentarse a la escritura del primer test es una experiencia muy curiosa que nos encontramos al aventurarnos en el mundo del TDD. No tenemos nada, ni clases, ni métodos, ni nombres de archivos, pero tenemos que escribir un test que utilice todo eso que no existe. Esto no tiene sentido, es como empezar por el final.
++ Efectivamente, es lo que vimos en la definición de TDD y en cómo es el flujo de trabajo, primero el test, luego el código. Es chocante, pero una vez cambiado el chip, las cosas fluyen, y hasta alguno se divierte.
+```
 
+Hay que testear que al crear una cuenta, el saldo es 0.  
+Escribe un test que cree una cuenta y haga un _assert_ para comprobar que el saldo es 0.
+En JUnit5 Utilizaremos la anotaciones de _@Test_ y _@DisplayName_
+
+Decisiones: _package name_ para los test y el _core_ , _nombres para las clases_, etc. _nombre del test_, _nombre de la clase que alberga el test_. etc...
+
+```java
 package app.test;
  
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
  
 class CuentaTest {
- 
-	@Test
-@DisplayName("Al crear una Cuenta el Saldo debe ser Cero")
-void alCrearCuentaElSaldoEsCero() {
+   @Test  
+   @DisplayName("Al crear una Cuenta el Saldo debe ser Cero")
+   void alCrearCuentaElSaldoEsCero() {
 		fail("Not yet implemented");
 	}
- 
 }
+```
 
-
-Tras crear esa clase como plantilla, solamente hemos aplicado TDD en el nombre del test, que debe ser muy descriptivo, aunque ahora podemos utilizar el @DisplayName, todo lo demás forma parte de la elaboración de tests con JUnit.
+Tras crear esa clase como **plantilla**, solamente hemos aplicado TDD en _el nombre del test_, que debe ser muy descriptivo, aunque ahora podemos utilizar el _@DisplayName_, todo lo demás forma parte de la elaboración de tests con JUnit.  
 Escribamos ahora el test. Según la especificación, el test debe:
-Crear una cuenta
-Comprobar que el saldo es 0
-Si nos fijamos el test va a hacer lo mismo que hará el cliente para validar la especificación.
-Bien, crear una cuenta. ¿Cómo se crea una cuenta en nuestra aplicación? En un desarrollo tradicional, tendrías (con suerte) un documento de diseño que te diría cómo se crea una cuenta. Pero con TDD no hay documento de diseño, las decisiones de diseño se toman "al vuelo", mientras escribimos los tests. Así que, como no hay nada diseñado, tienes total libertad para hacer un diseño a tu gusto. ¿Cómo te gustaría que fuera el código para crear una cuenta? 
+- Crear una cuenta
+- Comprobar que el saldo es 0  
+
+Si nos fijamos el test va a hacer lo mismo que hará el cliente para validar la especificación.  
+Bien, crear una cuenta. ¿Cómo se crea una cuenta en nuestra aplicación? En un desarrollo tradicional, tendrías (con suerte) un documento de diseño que te diría cómo se crea una cuenta. Pero con TDD no hay documento de diseño, las decisiones de diseño se toman **_al vuelo_**, mientras escribimos los tests.  
+Así que, como no hay nada diseñado, tienes total libertad para hacer un diseño a tu gusto.   
+
+#1 ¿Cómo te gustaría que fuera el código para crear una cuenta?  
+```java
 	void alCrearCuentaElSaldoEsCero() {
 		Cuenta c = new Cuenta();
 	}
+```
+Acabo de tomar varias decisiones de diseño: 
+- Que existe una clase llamada Cuenta y que tiene un constructor que no recibe parámetros. Quizás otro desarrollador hubiera escrito new Account() y otro o new Cuenta(0). Cada uno según su estilo. 
+- Optamos en el espíritu de TDD, en escribir lo mínimo necesario.  
 
-Acabo de tomar varias decisiones de diseño: Que existe una clase llamada Cuenta y que tiene un constructor que no recibe parámetros.
-Quizás otro desarrollador hubiera escrito new Account() y otro o new Cuenta(0). Cada uno según su estilo. Optamos en el espíritu de TDD, en escribir lo mínimo necesario. 
-Ahora me queda el segundo paso: comprobar que el saldo de la cuenta es 0. Voy a necesitar algo que todavía no existe. Un mecanismo para conocer el saldo de la cuenta. Voy a optar por un getter típico.
-
+#2 Ahora me queda el segundo paso: comprobar que el saldo de la cuenta es 0. Voy a necesitar algo que todavía no existe. Un mecanismo para conocer el saldo de la cuenta. Voy a optar por un getter típico.
+```java
     public void AlCrearCuentaElSaldoEsCero()
     {
         Cuenta c = new Cuenta();
         assertEquals(0, c.getSaldo());
     }
+```
+Así pues, otra decisión: que la clase tenga un método _getSaldo()_
 
-Así pues, otra decisión: que la clase tenga un método getSaldo(). Escribiendo primero los tests, mi código está orientado a ser fácilmente utilizado. Como debe ser fácilmente utilizado por los tests (no me voy a complicar la vida escribiendo test) acabará siendo también fácil de utilizar por otros componentes de la aplicación.
-El test ya está hecho, ya lo podemos probar. Evidentemente, no debemos esperar que suceda algo mágico. El test fallará estrepitosamente. Pero ese es precisamente el paso 1 del algoritmo. Escribir un test que falle. Ya podemos pasar al segundo paso del algoritmo: Escribir el código para que el test pase.
+```diff
++ Escribiendo primero los tests, mi código está orientado a ser fácilmente utilizable. Como debe ser fácilmente utilizado por los tests (no me voy a complicar la vida escribiendo test) acabará siendo también fácil de utilizar por otros componentes de la aplicación.
+```
+
+El test ya está hecho, ya lo podemos probar. Evidentemente, no debemos esperar que suceda algo mágico. El test fallará estrepitosamente. Pero ese es precisamente el **paso 1 del algoritmo:  Escribir un test que falle**.   
+Ya podemos pasar al **segundo paso del algoritmo: Escribir el código para que el test pase**.
  
-Concretamente, el mínimo código necesario para que el test no falle.
-EL primer impulso es empezar a programar según tenemos en nuestra cabeza (gracias a nuestra experiencia) cómo tiene que ser la clase Cuenta, con sus getters y sus setters, propiedades, constructor, métodos... y seguro que al terminar, el test pasa.
-Pero no es eso lo que dice TDD. El código debe estar guiado por el test. Por ahora el yesy ni arranca.
-El test necesita que exista una clase Cuenta, así que vamos a crearla. Ahora toca pensar dónde crear esa clase. Por claridad la voy a ubicar en otro package. (Me salto las normas) y usamos el asistente de Eclipse para crear lo que deseamos
+Concretamente, **el mínimo código necesario para que el test no falle**.
+EL primer impulso es empezar a programar según tenemos en nuestra cabeza (gracias a nuestra experiencia) cómo tiene que ser la clase _Cuenta_, con sus _getters_ y sus _setters_, _propiedades_, _constructor_, _métodos_... y seguro que al terminar, el test pasa. 
+
+Pero no es eso lo que dice TDD. **El código debe estar guiado por el test**. Por ahora el test ni arranca.  
+El test necesita que exista una clase Cuenta, así que vamos a crearla. Ahora toca pensar dónde crear esa clase. Por claridad la voy a ubicar en otro package:
+```diff
+! !Ojo! No indico todo el código. Sólo lo que he cambiado.
+```
+```java
 package app.core;
  
 public class Cuenta {
  
 }
+```
 
 Y la importo en mi test:
+```java
 import app.core.Cuenta;
  
 class CuentaTest {
@@ -325,16 +357,15 @@ class CuentaTest {
 		assertEquals(0, c.getSaldo());
 		}
 }
-
-
-
-
-
+```
 
 Volvemos a ejecutar el test:
-java.lang.Error: Unresolved compilation problem: 
-	The method getSaldo() is undefined for the type Cuenta
-Ahora el test nos dice que falta un método getSaldo() en la clase Cuenta. Manos a la obra.
+```diff
+- java.lang.Error: Unresolved compilation problem: 
+-	The method getSaldo() is undefined for the type Cuenta
+```
+Ahora el test nos dice que falta un método _getSaldo()_ en la clase _Cuenta_. Manos a la obra.  
+```java
 public class Cuenta {
  
 	public int getSaldo() {
@@ -342,10 +373,13 @@ public class Cuenta {
 		return null;
 	}
 }
-
+```
 
 Ejecutemos ahora el test:
-Failed .
+```diff 
+- Failed.
+```
+
 Arreglemoslo, no con un código super completo, y super funcional, sino, recordemos, con el mínimo código necesario para que el test pase.
 ...
 	public int getSaldo() {
