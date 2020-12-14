@@ -6,7 +6,7 @@ Ideas de:
 - http://www.chuidiang.org/java/herramientas/test-automaticos/tdd-test-driven-development.php
 - https://phauer.com/2019/modern-best-practices-testing-java/
 - https://devs4j.com/2018/04/23/pruebas-unitarias-parte-2-junit-y-mockito-primeros-pasos/
-- https://github.com/carherco/curso-unit-testing-phpunit
+- https://github.com/carherco/curso-unit-testing-phpunit (Carlos Herrera)<- Principal
 
 
 INDICE  por desarrollar   
@@ -79,6 +79,14 @@ Una prueba debe contener tres bloques que estén separados por una línea vacía
 Permiten programar tests de manera muy sencilla.  
 Cada lenguaje de programación tiene uno o más frameworks profesionales de testeo.  
 Algunos de los más conocidos son: NUnit, xUnit, **JUnit**, PhpUnit, etc... 
+
+Como aserciones podemos utilizar varios tipos en JUnit5, ej:
+- `assertEquals(3000, c.getSaldo())`;
+- `assertEquals(4, 4, "Ahora el mensaje opcional de la aserción es el último parámetro.")`;
+- `assertTrue`, `assertAll`, etc... 
+
+pero con `assertEquals` podemos avanzar esta introducción.
+
 
 
 ## ATDD como Punto de partida para TDD
@@ -682,7 +690,7 @@ No observamos nada que refactorizar, seguimos con el resto de casos
 - Los ingresos admiten un máximo de 2 decimales de precisión
   - Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45
   - Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
-- La cantidad máxima que se puede ingresar es de 6000
+  - La cantidad máxima que se puede ingresar es de 6000
   -Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
   - Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0   
 
@@ -699,11 +707,11 @@ Tests:
 ```
 
 Ejecuto el test y... falla. El paso 1 de TDD dice que tengo que escribir un test que falle.   
-Ojo! Con un Lenguaje de Tipado dinámico puede no fallar, ya que no haría distinción entre enteros y decimales. Java y la mayoría de lenguajes de tipado estático obliga con este test a ir al código y cambiar el tipo de dato de int a float.   
+Ojo! Con un Lenguaje de *Tipado dinámico* (PHP, Python, JS ) puede no fallar, ya que no haría distinción entre enteros y decimales. Java y la mayoría de lenguajes de *tipado estático* obliga con este test a ir al código y cambiar el tipo de dato de `int` a `float`.   
 Lo corregimos, pasamos el test y refactorizamos (nada en este caso) y continuamos con el siguiente test
 
 Seguimos.   
-Haremos los 3 tests que quedan rápidamente. No aportan nada didáctico nuevo.
+Haremos los 3 tests que quedan. No aportan nada didáctico nuevo.
 - Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
 - Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
 - Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0  
@@ -734,7 +742,7 @@ Tests:
     }
  
 ```    
-Código final:
+Código final del `core`:
 ```java
 public class Cuenta {
  
@@ -747,15 +755,24 @@ public class Cuenta {
 	}
 	
 	public void ingreso(float cantidad){
-        if(round(cantidad, 2)!=cantidad){ this.saldo = 0; }
-        elseif(cantidad < 0){ this.saldo = 0; }
-        elseif(cantidad > 6000.00){ this.saldo = 0; } else { this.saldo += cantidad;  }
+        if(round(cantidad, 2)!=cantidad)
+           { this.saldo = 0; }
+        elseif(cantidad < 0)
+           { this.saldo = 0; }
+        elseif(cantidad > 6000.00)
+           { this.saldo = 0; } 
+        else 
+           { this.saldo += cantidad;  }
 	}
 }
 ```
 
-Paso 2, los tests pasan.
-Paso 3. Refactorizar. La función `ingreso()` empieza a tener más líneas de control que de lo que realmente hace. Me pide refactorizar. Voy a crear un método privado de validación
+Paso 2: los tests pasan.  
+Paso 3: Refactorizar. La función `ingreso()` empieza a tener más líneas de control que de lo que realmente hace. E paso me pide refactorizar. Voy a crear un método privado de `validarCantidadIngresada`
+
+```diff
+- Esta función no está en el codigo del repositorio.
+```
 
 ```java    
     public void ingreso(float cantidad){
@@ -794,7 +811,11 @@ Ya hemos acabado con la funcionalidad de **ingreso**.
 Ahora tocarían la de **retirada** y la de **transferencia**.
 
 ```diff
-- Turno de la familia 1daw3
+- Turno de la familia 1daw3. Os toca hacer los ejemplos que faltan.
+! - Hacer los metodos necesarios, para las funcionalidades de retirar, y transferencia
++ PARA ESTAS NAVIDADES!!!
+
+- Para seguir el texto que continua debes tener los metodos de "transferencia" finalizados. y "validarCantidadTransferencia".
 ```
 
 ## Test Driven Bug Fixing
@@ -815,7 +836,7 @@ Para corregir el bug siguiendo TDD hay que seguir la técnica denominada **Test 
 Lo primero es verificar con el cliente qué debe hacer exactamente la aplicación en ese caso que no está funcionando.
 >Si un usuario con 2350 transfiere 2500 a otro usuario con saldo 50 ¿cuál debería ser el resultado? Como no se puede hacer esa transferencia porque el usuario emisor no tiene suficiente saldo, los saldos deberían quedarse como están.
 
-O. Entonces, si un usuario con 2350 transfiere 2500 a otro usuario con saldo 50, el saldo del emisor debería seguir siendo 2350 y el del receptor debería seguir siendo 50 ¿correcto?
+O. Entonces, si un usuario con 2350€ transfiere 2500€ a otro usuario con saldo 50€, el saldo del emisor debería seguir siendo 2350€ y el del receptor debería seguir siendo 50€ ¿correcto?
 
 > "Correcto, así debe ser"
 
@@ -823,26 +844,27 @@ Hemos vuelto a hacer ATDD y ya tenemos un ejemplo concreto para convertirlo en u
 **TDD - Paso 1. Escribimos el test.**
 
 ```java
-    @Test
-    @DisplayName("")
-    public void NoSePuedeTransferirMasSaldoDelDisponible(){
-        cuenta1 = new Cuenta();
-        cuenta1.ingreso(2350);
-        
-        cuenta2 = new Cuenta();
-        cuenta2.ingreso(300);
-        
-        cuenta1.transferencia(cuenta2,2500);
+  	@Test
+	@DisplayName("")
+	void NoSePuedeTransferirMasSaldoDelDisponible() {
+		Cuenta cuenta1 = new Cuenta();
+		cuenta1.ingreso(2350);
 
-        assertEquals(2350, cuenta1.getSaldo());
-        assertEquals(300, cuenta2.getSaldo());
-    }
+		Cuenta cuenta2 = new Cuenta();
+		cuenta2.ingreso(300);
+
+		cuenta1.transferencia(cuenta2, 2500);
+
+		assertEquals(2350, cuenta1.getSaldo());
+		assertEquals(300, cuenta2.getSaldo());
+	}
 ```
 
-Ejecutamos. El test falla. Precisamente ocurre lo que el usuario ha reportado que ocurre: al emisor no se le descuenta ninguna cantidad, pero al receptor sí que se le ingresa la cantidad.
-"Test Driven Bug Fixing" nos da la seguridad de estar reproduciendo exactamente el fallo que hay que corregir, y al ejecutar el test, ver que realmente falla. ¡No tenemos ni que utilizar la aplicación para comprobarlo!
-TDD - Paso 2. Hacer que el test Pase.
-src\app\core\Cuenta.java
+Ejecutamos. El test falla. Precisamente ocurre lo que el usuario ha reportado que ocurre: al emisor no se le descuenta ninguna cantidad, pero al receptor sí que se le ingresa la cantidad.   
+**"Test Driven Bug Fixing"** nos da la seguridad de estar reproduciendo exactamente el fallo que hay que corregir, y al ejecutar el test, ver que realmente falla. ¡No tenemos ni que utilizar la aplicación para comprobarlo!
+
+**TDD - Paso 2. Hacer que el test Pase.**
+
 ```java    
     private void validarCantidadTransferencia(cantidad){        
         if(cantidad < 0) {
@@ -863,29 +885,43 @@ src\app\core\Cuenta.java
 }
 ```
 
-Ejecutamos. ¡¡¡Pasa todos los tests!!!
-TDD - Paso 3: Refactorizamos (si es necesario) y volvemos a comprobar que pasan todos los tests
-Todo correcto. Ya podemos subir el código a producción sin miedo.
+Ejecutamos. ¡¡¡Pasa todos los tests!!! 
+
+**TDD - Paso 3: Refactorizamos** (si es necesario) y volvemos a comprobar que pasan todos los tests
+Todo correcto. Ya podemos subir el código a producción sin miedo. ;)
 
  
 #### Test Driven Bug Fixing II
 
-Hace tiempo que acabamos el desarrollo de nuestra aplicación y está funcionando en producción sin problemas.
-Pero un día llega nuestro cliente super preocupado. La aplicación no va. Dice que a algunos usuarios les deja sin saldo.
-Como bien sabemos por experiencia, para poder corregir un bug, necesitamos reproducirlo. Así, que le pedimos al cliente que nos diga cómo ha sido alguno de los casos en los que ha ocurrido el fallo.
-Nos cuenta que un usuario se ha quejado de que tenía 2350€ en su cuenta, ha ido a ingresar 7000 y se ha quedado sin saldo.
-Nuestro primer impulso es ir al código, a la función ingreso, y mirarla para ver si descubrimos el fallo. ¡¡¡Error!!!* eso no es TDD. Para corregir el bug siguiendo TDD hay que seguir la técnica denominada Test Driven Bug Fixing (Corrección de Bugs Guíado por Tests). Esto no es más que hacer lo que hemos estado haciendo durante todo el proyecto:
-Escribir un test que falle
-Escribir el código que haga pasar el test
-Refactorizar.
+Hace tiempo que acabamos el desarrollo de nuestra aplicación y está funcionando en producción sin problemas.   
+Pero un día llega nuestro cliente super preocupado.   La aplicación no va. Dice que 
+> a  algunos usuarios les deja sin saldo.   
+
+Como bien sabemos por experiencia, para poder corregir un **bug**, necesitamos reproducirlo. Así, que le pedimos al cliente que nos diga cómo ha sido alguno de los casos en los que ha ocurrido el fallo.    
+Nos cuenta que: 
+> un usuario se ha quejado de que tenía 2350€ en su cuenta, ha ido a ingresar 7000€ y se ha quedado sin saldo.
+
+Nuestro primer impulso es ir al código, a la función ingreso, y mirarla para ver si descubrimos el fallo. ¡¡¡Error!!!* eso no es TDD. Para corregir el bug siguiendo TDD hay que seguir la técnica denominada **Test Driven Bug Fixing** (Corrección de Bugs Guíado por Tests). Esto no es más que hacer lo que hemos estado haciendo durante todo el proyecto:  
+- Escribir un test que falle
+- Escribir el código que haga pasar el test
+- Refactorizar.  
+
 Lo primero es verificar con el cliente qué debe hacer exactamente la aplicación en ese caso que no está funcionando.
+
 "Si un usuario con 2350€ ingresa 7000, el saldo debería ser 9350 ¿verdad?
-"No, no. Debería seguir siendo 2350. Hay un límite de ingreso de 6000.
+
+> "No, no. Debería seguir siendo 2350. Hay un límite de ingreso de 6000."
+
 "De acuerdo".
-Hemos vuelto a hacer ATDD y ya tenemos un ejemplo concreto para convertirlo en un test.
-TDD - Paso 1. Escribimos el test.
+
+Hemos vuelto a hacer ATDD y ya tenemos un ejemplo concreto para convertirlo en un test:
+
+**TDD - Paso 1. Escribimos el test.**
+
 ```java
-    public void IngresoMasDe6000NoEsValidoAlIngresar7000EnCuentaCon2350ElSaldoSeQuedaEn2350(){
+@Test
+	@DisplayName("")
+	public void ingresoMasDe6000NoEsValidoAlIngresar7000EnCuentaCon2350ElSaldoSeQuedaEn2350(){
         //Arrange
         Cuenta c = new Cuenta();
         c.ingreso(2350);
@@ -896,12 +932,13 @@ TDD - Paso 1. Escribimos el test.
         //Asert
         assertEquals(2350, c.getSaldo());
     }
+
 ```
 
-Ejecutamos. El test falla. Precisamente ocurre lo que el usuario ha reportado que ocurre: su saldo se queda a 0.
-"Test Driven Bug Fixing" nos da la seguridad de estar reproduciendo exactamente el fallo que hay que corregir, y al ejecutar el test, ver que realmente falla. ¡No tenemos ni que utilizar la aplicación para comprobarlo!
-TDD - Paso 2. Hacer que el test Pase.
-src\app\core\Cuenta.java
+Ejecutamos. El test falla. Precisamente ocurre lo que el usuario ha reportado que ocurre: **su saldo se queda a 0.**   
+**"Test Driven Bug Fixing"** nos da la seguridad de estar reproduciendo exactamente el fallo que hay que corregir, y al ejecutar el test, ver que realmente falla. ¡No tenemos ni que utilizar la aplicación para comprobarlo!   
+
+**TDD - Paso 2. Hacer que el test Pase.**
 ```java
     public void ingreso(cantidad){
         esValida = this.validarCantidadIngresada(cantidad);
@@ -909,136 +946,151 @@ src\app\core\Cuenta.java
             this.saldo += cantidad;
         }
     }
-
 }
 ```
 
-Ejecutamos. ¡¡¡Pasa todos los tests!!!
-TDD - Paso 3: Refactorizamos (si es necesario) y volvemos a comprobar que pasan todos los tests
-Todo correcto. Ya podemos subir el código a producción sin miedo.
+Ejecutamos. ¡¡¡Pasa todos los tests!!!   
 
+**TDD - Paso 3: Refactorizamos (si es necesario)** y volvemos a comprobar que pasan todos los tests
+Todo correcto. Ya podemos subir el código a producción sin miedo.
 
 ## Errores comunes en TDD
  
-Empezar con TDD no es coser y cantar. A lo largo del proceso surgen muchas dudas y se cometen muchos errores.
-A continuación enumero una pequeña lista de errores comunes al empezar con TDD.
-El nombre del test no es suficientemente descriptivo
+Empezar con TDD no es coser y cantar. A lo largo del proceso surgen muchas dudas y se cometen muchos errores.   
+A continuación enumero una pequeña lista de errores comunes al empezar con TDD.  
+- El nombre del test no es suficientemente descriptivo
 Recordemos que el nombre de un método y de sus parámetros son su mejor documentación. En el caso de un test, su nombre debe expresar con total claridad la intención del mismo.
-Los nombres de los tests se deben parecer a esto:
-IngresoCantidadMasDe2DecimalesNoEsValido
-AlRetirar100EnCuentaCon500ElSaldoEs400
-AlRetirar200EnCuentaCon1200ElSaldoEs1000YAlRetirarOtros150ElSaldoEs850
-y no a esto:
-testRetirada1
-testRetirada2
-testRetirada3
-testForBUG128
-Escribir demasiados tests de una vez
+- Los nombres de los tests se deben parecer a esto:
+  - IngresoCantidadMasDe2DecimalesNoEsValido
+  - AlRetirar100EnCuentaCon500ElSaldoEs400
+  - AlRetirar200EnCuentaCon1200ElSaldoEs1000YAlRetirarOtros150ElSaldoEs850   
+y no a esto:  
+  - testRetirada1
+  - testRetirada2
+  - testRetirada3
+  - testForBUG128
+
+aunque no debemos ser estrictos con JUnit5 ya que podemos utilizar el `@DisplayNmae`.
+
+- Escribir demasiados tests de una vez
 La técnica establece que se debe escribir un test, y luego el código para hacerlo pasar. Luego otro test, y luego el código para hacerlo pasar... Siempre de uno en uno. De esta forma, al programar el código que debe pasar el test, nos aseguramos que cada decisión de diseño (de clases, métodos, relaciones entre clases, etc,) tomada en los tests es acertada, viable, válida...
-Al coger práctica y experiencia con TDD, es bastante habitual escribir varios tests seguidos y luego el código que los hace pasar. Pero si escribimos decenas de tests seguidos, corremos el riesgo de acarrear malas decisiones de diseño que no hemos contrastado al escribir el código que los hace pasar.
-Adopción parcial de TDD
-A veces sucede, por diversos motivos, que no todos los desarrolladores del equipo usan TDD.
+- Al coger práctica y experiencia con TDD, es bastante habitual escribir varios tests seguidos y luego el código que los hace pasar. Pero si escribimos decenas de tests seguidos, corremos el riesgo de acarrear malas decisiones de diseño que no hemos contrastado al escribir el código que los hace pasar.
+- Adopción parcial de TDD  
+A veces sucede, por diversos motivos, que no todos los desarrolladores del equipo usan TDD.   
 El proyecto fracasará con toda seguridad a menos que todo el equipo al completo esté aplicando TDD.
-No sabemos qué es lo que queremos que haga el SUT (Subjet Under Test)
-Nos hemos lanzado a escribir un test pero no sabemos en realidad qué es lo que el código bajo prueba tiene que hacer.
-En algunas ocasiones, lo resolvemos hablando con el dueño del producto y, en otras, hablando con otros desarrolladores. Hay que tener en cuenta que se están tomando decisiones de diseño al escribir los tests por lo que las especificaciones tienen que estar muy claras antes de empezar para no acabar diseñando un software que no cumple las especificaciones.
-No sabemos quién es el SUT y quién es el colaborador
-Es muy común que cuando necesitamos un colaborador, aquel que representamos mediante un doble (un mock, un stub...), para testear una funcionalidad del SUT, acabamos testeando al colaborador en lugar de al SUT.
-Un mismo método de test está haciendo múltiples afirmaciones
-Cuando practicamos TDD correctamente, apenas tenemos que usar el depurador. Cuando un test falla, lo encontramos directamente y lo corregimos en dos minutos. Para que esto sea así, cada método debe probar una única funcionalidad del SUT. A veces utilizamos varias afirmaciones (asserts) en el mismo test, pero sólo si giran en torno a la misma funcionalidad. Un método de test raramente excede las 10 líneas de código.
-Se nos olvida refactorizar
-No sólo por tener una gran batería de tests, el código ya es más fácil de mantener. Si el código no está limpio, será muy costoso modificarlo, y también sus tests. No hay que olvidar buscar y corregir código duplicado después de hacer pasar cada test. El código de los tests debe estar tan limpio como el código de producción.
-No eliminamos código muerto
+- No sabemos qué es lo que queremos que haga el SUT (Subjet Under Test)
+- Nos hemos lanzado a escribir un test pero no sabemos en realidad qué es lo que el código bajo prueba tiene que hacer.  
+En algunas ocasiones, lo resolvemos hablando con el dueño del producto y, en otras, hablando con otros desarrolladores. Hay que tener en cuenta que se están tomando decisiones de diseño al escribir los tests por lo que las especificaciones tienen que estar muy claras antes de empezar para no acabar diseñando un software que no cumple las especificaciones.  
+- No sabemos quién es el SUT y quién es el colaborador
+Es muy común que cuando necesitamos un colaborador, aquel que representamos mediante un doble (un mock, un stub...), para testear una funcionalidad del SUT, acabamos testeando al colaborador en lugar de al SUT.  MOCK y STUB están fuera de esta introducción.
+TAL VEZ para la siguiente evaluación.   
+- Un mismo método de test está haciendo múltiples afirmaciones.  
+Cuando practicamos TDD correctamente, apenas tenemos que usar el depurador. Cuando un test falla, lo encontramos directamente y lo corregimos en dos minutos. Para que esto sea así, cada método debe probar una única funcionalidad del SUT. A veces utilizamos varias afirmaciones (`asserts`) en el mismo test, pero sólo si giran en torno a la misma funcionalidad. Un método de test raramente excede las 10 líneas de código.  
+- Se nos olvida refactorizar.  
+No sólo por tener una gran batería de tests, el código ya es más fácil de mantener. Si el código no está limpio, será muy costoso modificarlo, y también sus tests. No hay que olvidar buscar y corregir código duplicado después de hacer pasar cada test. El código de los tests debe estar tan limpio como el código de producción.  
+- No eliminamos código muerto.  
 A veces, tras cambios en las especificaciones, queda código en desuso. Puede ser código de producción o pueden ser tests. Puesto que normalmente disponemos de un sistema de control de versiones que nos permite volver atrás si alguna vez volviese a hacer falta el código, debemos eliminar todo código que creamos en desuso. El código muerto induce a errores antes o después. Se suele menospreciar cuando se trata de tests pero, como hemos hecho notar antes, el código de los tests es tan importante como el código que testean.
 
 ## ANTIPATRONES
 
-James Carr (https://blog.james-carr.org/) recopiló una lista de antipatrones ayudado por la comunidad TDD.
-Ese listado ya no está disponible en su blog, pero la comunidad de TDD mantiene un catálogo de antipatrones en stackoverflow:
-Los nombres que les pusieron tienen un carácter cómico y no son en absoluto oficiales pero su contenido dice mucho. Algunos de ellos ya están recogidos en los errores comentados en el trabajo anterior.
+James Carr (https://blog.james-carr.org/) recopiló una lista de antipatrones ayudado por la comunidad TDD.   
+Ese listado ya no está disponible en su blog, pero la comunidad de TDD mantiene un catálogo de antipatrones en stackoverflow:   
+Los nombres que les pusieron tienen un carácter cómico y no son en absoluto oficiales pero su contenido dice mucho. Algunos de ellos ya están recogidos en los errores comentados en el trabajo anterior.   
 Como en tantas otras áreas, las reglas tienen sus excepciones. El objetivo es tenerlos en mente para identificar posibles malas prácticas al aplicar TDD.
-He traducido algunos de ellos y enumerado a continuación:
-El Mentiroso
-Un test completo que cumple todas sus afirmaciones (asserts) y parece ser válido pero que cuando se inspecciona más de cerca, muestra que realmente no está probando su cometido en absoluto.
-Setup Excesivo
-Es un test que requiere un montón de trabajo para ser configurado. A veces se usan varios cientos de líneas de código para configurar el entorno de dicho test, con varios objetos involucrados, lo cual nos impide saber qué es lo que se está probando debido a tanto "ruido".
-El Gigante
-Aunque prueba correctamente el objeto en cuestión, puede contener miles de líneas y probar muchísimos casos de uso. Esto puede ser un indicador de que el sistema que estamos probando es un Objeto Todopoderoso.
-El Imitador
-A veces, usar mocks puede estar bien y ser práctico pero otras, el desarrollador se puede perder imitando los objetos colaboradores. En este caso un test contiene tantos mocks, stubs y/o falsificaciones, que el SUT ni siquiera se está probando. En su lugar estamos probando lo que los mocks están devolviendo.
-Sobras Abundantes
-Es el caso en que un test crea datos que se guardan en algún lugar y otro test los reutiliza para sus propios fines. Si el generador de los datos se ejecuta después, o no se llega a ejecutar, el test que usa esos datos falla por completo.
-El Héroe Local
-Depende del entorno de desarrollo específico en que fue escrito para poder ejecutarse. El resultado es que el test pasa en dicho entorno pero falla en cualquier otro sitio. Un ejemplo típico es poner rutas que son específicas de una persona, como una referencia a un fichero en su escritorio.
-El Cotilla Quisquilloso
-Compara la salida completa de la función que se prueba, cuando en realidad sólo está interesado en pequeñas partes de ella. Esto se traduce en que el test tiene que ser continuamente mantenido a pesar de que los cambios sean insignificantes. Este es endémico de los tests de aplicaciones web. Ejemplo, comparar todo un HTML de salida cuando solo se necesita saber si el title es correcto.
-El Cazador Secreto
-A primera vista parece no estar haciendo ninguna prueba por falta de afirmaciones (asserts). El test está en verdad confiando en que se lanzará una excepción en caso de que ocurra algún accidente desafortunado y que el framework de tests la capturará reportando el fracaso.
-Ejemplo: Test de conexión a base de datos. Se confía en que si no se establece conexión, el propio sistema lanzará una excepción provocando que falle el test.
-El Escaqueado
-Un test que hace muchas pruebas sobre efectos colaterales (presumiblemente fáciles de hacer) pero que nunca prueba el auténtico comportamiento deseado.
-El Bocazas
-Un test o batería de tests que llenan la consola con mensajes de diagnóstico, de log, de depuración, y demás forraje, incluso cuando los tests pasan. A veces, durante la creación de un test, es necesario mostrar salida por pantalla, y lo que ocurre en este caso es que, cuando se termina, se deja ahí aunque ya no haga falta, en lugar de limpiarlo.
-El Cazador Hambriento
-Captura excepciones y no tiene en cuenta sus trazas, a veces reemplazandolas con un mensaje menos informativo, pero otras incluso registrando el suceso en un log y dejando el test pasar.
-El Secuenciador
-Un test unitario que depende de que aparezcan, en el mismo orden, elementos de una lista sin ordenar.
-Dependencia Oculta
-Un primo hermano del Héroe Local, un test que requiere que existan ciertos datos en alguna parte antes de correr. Si los datos no se rellenaron, el test falla sin dejar apenas explicación, forzando al desarrollador a indagar por acres de código para encontrar qué datos se suponía que debía haber.
-El Enumerador
-Una batería de tests donde cada test es simplemente un nombre seguido de un número, ej, test1, test2, test3. Esto supone que la misión del test no queda clara y la única forma de averiguarlo es leer todo el test y rezar para que el código sea claro.
-El Extraño
-Un test que ni siquiera pertenece a la clase de la cual es parte. Está en realidad probando otro objeto (X), muy probablemente usado por el que se está probando en la clase actual (objeto Y), pero saltándose la interacción que hay entre ambos, donde el objeto X debía funcionar en base a la salida de Y, y no directamente. También conocido como La Distancia Relativa.
-El Evangelista de los Sistemas Operativos
-Confía en que un sistema operativo específico se está usando para ejecutarse. Un buen ejemplo sería un test que usa la secuencia de nueva línea de Windows en la afirmación (assert), rompiéndose cuando corre bajo Linux.
-El que Siempre Funciona
-Se escribió para pasar en lugar de para fallar primero. Como desafortunado efecto colateral, sucede que el test siempre funciona, aunque debiese fallar.
-El Libre Albedrío
-En lugar de escribir un nuevo test para probar una nueva funcionalidad, se añade una nueva afirmación (assert) dentro de un test existente.
-El Único
-Una combinación de varios antipatrones, particularmente El Libre Albedrío y El Gigante. Es un sólo test unitario que contiene el conjunto entero de pruebas de toda la funcionalidad que tiene un objeto. Una indicación común de eso es que el test tiene el mismo nombre que su clase y contiene múltiples líneas de setup y afirmaciones.
-El Macho Chillón
-Debido a recursos compartidos puede ver los datos resultantes de otro test y puede hacerlo fallar incluso aunque el sistema a prueba sea perfectamente válido. Esto se ha visto comúnmente en fitnesse, donde el uso de variables de clase estáticas, usadas para guardar colecciones, no se limpiaban adecuadamente después de la ejecución, a menudo repercutiendo de manera inesperada en otros tests. También conocido como El huésped no invitado.
-El Excavador Lento
-Un test que se ejecuta de una forma increíblemente lenta. Cuando los desarrolladores lo lanzan, les da tiempo a ir al servicio,tomar café, o peor, dejarlo corriendo y marcharse a casa al terminar el día.
-Ciudadanos de segunda clase
-El código de los tests no se refactoriza tan cuidadosamente como el código de producción, acabando con un montón de código duplicado, y haciendo que los tests sean difícil de mantener.
-El Inspector
+
+
+Carlos Herrera traducido algunos de ellos y enumerado a continuación:
+- _El Mentiroso_ 
+Un test completo que cumple todas sus afirmaciones (asserts) y parece ser válido pero que cuando se inspecciona más de cerca, muestra que realmente no está probando su cometido en absoluto.  
+- _Setup Excesivo_   
+Es un test que requiere un montón de trabajo para ser configurado. A veces se usan varios cientos de líneas de código para configurar el entorno de dicho test, con varios objetos involucrados, lo cual nos impide saber qué es lo que se está probando debido a tanto "ruido".   
+- _El Gigante_  
+Aunque prueba correctamente el objeto en cuestión, puede contener miles de líneas y probar muchísimos casos de uso. Esto puede ser un indicador de que el sistema que estamos probando es un Objeto Todopoderoso.  
+- _El Imitador_  
+A veces, usar mocks puede estar bien y ser práctico pero otras, el desarrollador se puede perder imitando los objetos colaboradores. En este caso un test contiene tantos mocks, stubs y/o falsificaciones, que el SUT ni siquiera se está probando. En su lugar estamos probando lo que los mocks están devolviendo.   
+- _Sobras Abundantes_  
+Es el caso en que un test crea datos que se guardan en algún lugar y otro test los reutiliza para sus propios fines. Si el generador de los datos se ejecuta después, o no se llega a ejecutar, el test que usa esos datos falla por completo.  
+- _El Héroe Local_  
+Depende del entorno de desarrollo específico en que fue escrito para poder ejecutarse. El resultado es que el test pasa en dicho entorno pero falla en cualquier otro sitio. Un ejemplo típico es poner rutas que son específicas de una persona, como una referencia a un fichero en su escritorio.  
+- _El Cotilla Quisquilloso_  
+Compara la salida completa de la función que se prueba, cuando en realidad sólo está interesado en pequeñas partes de ella. Esto se traduce en que el test tiene que ser continuamente mantenido a pesar de que los cambios sean insignificantes. Este es endémico de los tests de aplicaciones web. Ejemplo, comparar todo un HTML de salida cuando solo se necesita saber si el title es correcto.   
+- _El Cazador Secreto_  
+A primera vista parece no estar haciendo ninguna prueba por falta de afirmaciones (`asserts`). El test está en verdad confiando en que se lanzará una excepción en caso de que ocurra algún accidente desafortunado y que el framework de tests la capturará reportando el fracaso.   
+Ejemplo: Test de conexión a base de datos. Se confía en que si no se establece conexión, el propio sistema lanzará una excepción provocando que falle el test.  
+- _El Escaqueado_  
+Un test que hace muchas pruebas sobre efectos colaterales (presumiblemente fáciles de hacer) pero que nunca prueba el auténtico comportamiento deseado.  
+- _El Bocazas_  
+Un test o batería de tests que llenan la consola con mensajes de diagnóstico, de log, de depuración, y demás forraje, incluso cuando los tests pasan. A veces, durante la creación de un test, es necesario mostrar salida por pantalla, y lo que ocurre en este caso es que, cuando se termina, se deja ahí aunque ya no haga falta, en lugar de limpiarlo.  
+- _El Cazador Hambriento_  
+Captura excepciones y no tiene en cuenta sus trazas, a veces reemplazandolas con un mensaje menos informativo, pero otras incluso registrando el suceso en un log y dejando el test pasar.  
+- _El Secuenciador_   
+Un test unitario que depende de que aparezcan, en el mismo orden, elementos de una lista sin ordenar.   
+- _Dependencia Oculta_   
+Un primo hermano del Héroe Local, un test que requiere que existan ciertos datos en alguna parte antes de correr. Si los datos no se rellenaron, el test falla sin dejar apenas explicación, forzando al desarrollador a indagar por acres de código para encontrar qué datos se suponía que debía haber.   
+- _El Enumerador_  
+Una batería de tests donde cada test es simplemente un nombre seguido de un número, ej, test1, test2, test3. Esto supone que la misión del test no queda clara y la única forma de averiguarlo es leer todo el test y rezar para que el código sea claro.   
+- _El Extraño_   
+Un test que ni siquiera pertenece a la clase de la cual es parte. Está en realidad probando otro objeto (X), muy probablemente usado por el que se está probando en la clase actual (objeto Y), pero saltándose la interacción que hay entre ambos, donde el objeto X debía funcionar en base a la salida de Y, y no directamente. También conocido como _La Distancia Relativa_.  
+- _El Evangelista de los Sistemas Operativos  
+Confía en que un sistema operativo específico se está usando para ejecutarse. Un buen ejemplo sería un test que usa la secuencia de nueva línea de Windows en la afirmación (assert), rompiéndose cuando corre bajo Linux.  
+- El que _Siempre Funciona_  
+Se escribió para pasar en lugar de para fallar primero. Como desafortunado efecto colateral, sucede que el test siempre funciona, aunque debiese fallar.  
+- _El Libre Albedrío_
+En lugar de escribir un nuevo test para probar una nueva funcionalidad, se añade una nueva afirmación (assert) dentro de un test existente.  
+- _El Único_    
+Una combinación de varios antipatrones, particularmente El Libre Albedrío y El Gigante. Es un sólo test unitario que contiene el conjunto entero de pruebas de toda la funcionalidad que tiene un objeto. Una indicación común de eso es que el test tiene el mismo nombre que su clase y contiene múltiples líneas de setup y afirmaciones.  
+- _El Macho Chillón_  
+Debido a recursos compartidos puede ver los datos resultantes de otro test y puede hacerlo fallar incluso aunque el sistema a prueba sea perfectamente válido. Esto se ha visto comúnmente, donde el uso de variables de clase estáticas, usadas para guardar colecciones, no se limpiaban adecuadamente después de la ejecución, a menudo repercutiendo de manera inesperada en otros tests. También conocido como _El huésped no invitado_.  
+- _El Excavador Lento_  
+Un test que se ejecuta de una forma increíblemente lenta. Cuando los desarrolladores lo lanzan, les da tiempo a ir al servicio,tomar café, o peor, dejarlo corriendo y marcharse a casa al terminar el día.  
+- _Ciudadanos de segunda clase_  
+El código de los tests no se refactoriza tan cuidadosamente como el código de producción, acabando con un montón de código duplicado, y haciendo que los tests sean difícil de mantener.  
+- _El Inspector_  
 Viola la encapsulación en un intento de conseguir el 100 % de cobertura de código y por ello sabe tanto del objeto a prueba que, cualquier intento de refactorizarlo, rompe el test.
 
-Ventajas y desventajas del TDD
-Ventajas o beneficios
-Cuando se utiliza TDD en un proyecto virgen, en raras ocasiones se tiene la necesidad de utilizar el depurador o debugger.
-A pesar de los elevados requisitos iniciales de aplicar esta metodología, el desarrollo guiado por pruebas (TDD) puede proporcionar un gran valor añadido en la creación de software, produciendo aplicaciones de más calidad y en menos tiempo.
-Proporciona al programador una gran confianza en el código desarrollado.
-Minimiza el número de bugs en producción.
-El equipo de desarrollo se focaliza en lo que el cliente quiere (todavía mucho más si se aplica ATDD).
-Desventajas
+### Ventajas y desventajas del TDD
+
+#### Ventajas o beneficios
+- Cuando se utiliza TDD en un proyecto virgen, en raras ocasiones se tiene la necesidad de utilizar el depurador o debugger.  
+- A pesar de los elevados requisitos iniciales de aplicar esta metodología, el desarrollo guiado por pruebas (TDD) puede proporcionar un gran valor añadido en la creación de software, produciendo aplicaciones de más calidad y en menos tiempo.  
+- Proporciona al programador una gran confianza en el código desarrollado.  
+- Minimiza el número de bugs en producción.
+- El equipo de desarrollo se focaliza en lo que el cliente quiere (todavía mucho más si se aplica ATDD).
+
+#### Desventajas
 Cuesta muchísimo trabajo encontrar en la literatura y en la bibliografía las desventajas del uso de TDD. Aquí pongo un listado de las que he encontrado:
-Aprender bien la técnica es todo un reto.
-Muchos tests pueden ser difíciles de escribir, sobretodo los tests no unitarios.
-Casi imposible de aplicar a código "legacy".
-TDD incrementa enormemente la confianza, pero puede crear una falsa sensación de seguridad.
-Al igual que introducimos bugs al programar el código, es posible introducir bugs al programar los tests.
-Si el programador malinterpreta la especificación entonces se acabará creando un test que llevará a un código que pasa el test pero que está mal.
-Los tests automatizados no son sustitutos de testeadores reales. Siempre es necesaria la mezcla de ambos.
-Dado que los programadores que escriben el código, testean el código, se pierden la buena práctica de que el testeador sea distinto del programador.
+- Aprender bien la técnica es todo un reto.
+- Muchos tests pueden ser difíciles de escribir, sobretodo los tests no unitarios.
+- Casi imposible de aplicar a código "legacy".
+- TDD incrementa enormemente la confianza, pero puede crear una falsa sensación de seguridad.
+- Al igual que introducimos bugs al programar el código, es posible introducir bugs al programar los tests.
+- Si el programador malinterpreta la especificación entonces se acabará creando un test que llevará a un código que pasa el test pero que está mal.
+- Los tests automatizados no son sustitutos de testeadores reales. Siempre es necesaria la mezcla de ambos.
+- Dado que los programadores que escriben el código, testean el código, se pierden la buena práctica de que el testeador sea distinto del programador.
  
-#¿Puedo aplicar TDD con un equipo que no sea experto?
-Principiante
-Capaz de escribir un test unitario previo al código correspondiente.
-Capaz de escribir código suficiente para hacer pasar un test que previamente falla.
-Intermedio
-Practica "test driven bug fixing": Cuando se encuentra un bug, escribe un test que reproduce el defecto antes de corregirlo.
-Capaz de descomponer una funcionalidad de un programa en una secuencia de varios test unitarios.
-Conoce y puede nombrar diferentes tácticas para guiar en la escritura de tests a sus compañeros (por ejemplo: "para testear un algoritmo recursivo, primero escribe un test para el caso correspondiente al fin de la recursión")
-Capaz de detectar elementos reutilizables en los tests
-Capaz de proporcionar herramientas de prueba específicas para cada situación
-Experto
-Capaz de establecer un "roadmap" de tests planificados para funcionalidades macroscópicas (y revisarlo si es necesario)
-Capaz de aplicar TDD con diferentes paradigmas de diseño: orientación a objetos, funcional, dirigido por eventos...
-Capaz de aplicar TDD con diferentes dominios técnicos: interfaz de usuario, acceso persistente a base de datos...
+
+
+#### Los Niveles `rpfesionales en TDD
+o  ¿Puedo aplicar TDD con un equipo que no sea experto?
+
+
+**Principiante** 
+- Capaz de escribir un test unitario previo al código correspondiente.
+- Capaz de escribir código suficiente para hacer pasar un test que previamente falla.
+
+**Intermedio** 
+- Practica "test driven bug fixing": Cuando se encuentra un bug, escribe un test que reproduce el defecto antes de corregirlo.
+- Capaz de descomponer una funcionalidad de un programa en una secuencia de varios test unitarios.  
+- Conoce y puede nombrar diferentes tácticas para guiar en la escritura de tests a sus compañeros (por ejemplo: "para testear un algoritmo recursivo, primero escribe un test para el caso correspondiente al fin de la recursión")   
+- Capaz de detectar elementos reutilizables en los tests  
+- Capaz de proporcionar herramientas de prueba específicas para cada situación  
+
+**Experto**
+- Capaz de establecer un "roadmap" de tests planificados para funcionalidades macroscópicas (y revisarlo si es necesario)  
+- Capaz de aplicar TDD con diferentes paradigmas de diseño: orientación a objetos, funcional, dirigido por eventos...  
+- Capaz de aplicar TDD con diferentes dominios técnicos: interfaz de usuario, acceso persistente a base de datos...
 
 
 
+VSCODE:  
 The `JAVA DEPENDENCIES` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-pack/blob/master/release-notes/v0.9.0.md#work-with-jar-files-directly).
