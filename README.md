@@ -210,22 +210,22 @@ Antes es conveniente que se hayan ordenado por funcionalidad, agrupando todos lo
 #### The List II
 **Creación de cuentas.**
 - Las cuentas siempre se crean con saldo 0. Hay que hacer algún ingreso después si se quiere tener saldo:
-  - Al crear cuenta el saldo es cero
+  1. Al crear cuenta el saldo es cero
   
 **Ingresos.**
 - Suman la cantidad ingresada al saldo.
 - No hay comisiones ni nada por el estilo.
-  - Al ingresar 100 en cuenta vacía el saldo es 100
-  - Al ingresar 3000 en cuenta vacía el saldo es 3000
-  - Al ingresar 3000 en cuenta con 100 el saldo es 3100
+  2. Al ingresar 100 en cuenta vacía el saldo es 100
+  3. Al ingresar 3000 en cuenta vacía el saldo es 3000
+  4. Al ingresar 3000 en cuenta con 100 el saldo es 3100
 - No se pueden hacer ingresos negativos
-  -  Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0
+  5.  Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0
 - Los ingresos admiten un máximo de 2 decimales de precisión
-  - Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45
-  - Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
+  6. Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45
+  7. Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
 - La cantidad máxima que se puede ingresar es de 6000
-  - Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
-  - Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0
+  8. Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
+  9. Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0
   
 **Retiradas.**
 - Restan la cantidad ingresada al saldo.
@@ -271,9 +271,12 @@ Si nuestra aplicación pasa esos 20 chequeos, tanto nosotros como nuestro client
 
 Hacemos el Setup del Proyecto VSCODE con Java y añadiremos Pruebas unitarias lo que nos instalará el Framework JUnit. Lo personalizamos como hemos visto en clase.
 
-#### Primer test
+#### Primer test #1
 Empezaremos con la primera funcionalidad, con el primer test de la misma: 
 - Al crear cuenta el saldo es cero
+
+**Toca el paso 1. El test que falla**
+
 ```diff
 -Shock!!!!
 - Enfrentarse a la escritura del primer test es una experiencia muy curiosa que nos encontramos al aventurarnos en el mundo del TDD. No tenemos nada, ni clases, ni métodos, ni nombres de archivos, pero tenemos que escribir un test que utilice todo eso que no existe. Esto no tiene sentido, es como empezar por el final.
@@ -320,7 +323,7 @@ Acabo de tomar varias decisiones de diseño:
 - Que existe una clase llamada Cuenta y que tiene un constructor que no recibe parámetros. Quizás otro desarrollador hubiera escrito new Account() y otro o new Cuenta(0). Cada uno según su estilo. 
 - Optamos en el espíritu de TDD, en escribir lo mínimo necesario.  
 
-#2 Ahora me queda el segundo paso: comprobar que el saldo de la cuenta es 0. Voy a necesitar algo que todavía no existe. Un mecanismo para conocer el saldo de la cuenta. Voy a optar por un getter típico.
+**Toca el paso segundo:** comprobar que el saldo de la cuenta es 0. Voy a necesitar algo que todavía no existe. Un mecanismo para conocer el saldo de la cuenta. Voy a optar por un getter típico.
 ```java
     public void AlCrearCuentaElSaldoEsCero()
     {
@@ -363,7 +366,7 @@ class CuentaTest {
 	void AlCrearCuentaElSaldoEsCero() {
 		Cuenta c = new Cuenta();
 		assertEquals(0, c.getSaldo());
-		}
+	}
 }
 ```
 
@@ -425,7 +428,7 @@ class CuentaTest {
 	void AlCrearCuentaElSaldoEsCero() {
 		Cuenta c = new Cuenta();
 		assertEquals(0, c.getSaldo());
-		}
+	}
 }
 ```
 
@@ -442,7 +445,7 @@ Hemos acabado con el primer test. Pasemos al segundo.
 Vayamos con el segundo test. Revisa el listado de ejemplos que tenemos que convertir en tests.   
  
 **Ingresos**.
-- Al ingresar 100 en cuenta vacía el saldo es 100
+2. Al ingresar 100 en cuenta vacía el saldo es 100
 
 **Escribiendo el test**
 
@@ -453,12 +456,11 @@ Convertimos el ejemplo en un test:
 ```java
 	@Test
 	@DisplayName("Al ingresar 100 en Cuenta nueva el Saldo es 100")
-	void void AlIngresar100EnCuentaNuevaElSaldoEs100()
-    	{
+	void alIngresar100EnCuentaNuevaElSaldoEs100(){
         Cuenta c = new Cuenta();
         c.ingreso(100);
         assertEquals(100, c.getSaldo());
-    	}
+    }
 ```
 
 He tenido que tomar otra decisión de diseño. Los ingresos se harán mediante un método `ingreso()` de la clase `Cuenta`, pasando la cantidad como parámetro.  
@@ -529,12 +531,11 @@ class CuentaTest {
 	void AlCrearCuentaElSaldoEsCero() {
 		Cuenta c = new Cuenta();
 		assertEquals(0, c.getSaldo());
-		}
+	}
  
 	@Test
 	@DisplayName("Al ingresar 100 en Cuenta nueva el Saldo es 100")
-	void AlIngresar100EnCuentaNuevaElSaldoEs100()
-    {
+	void AlIngresar100EnCuentaNuevaElSaldoEs100() {
         Cuenta c = new Cuenta();
         c.ingreso(100);
         assertEquals(100, c.getSaldo());
@@ -554,8 +555,7 @@ Convertimos el ejemplo en un test:
 ```java 
     @Test
 	@DisplayName("Al ingresar 3000 en Cuenta nueva el Saldo es 3000")
-	void AlIngresar3000EnCuentaNuevaElSaldoEs3000()
-    {
+	void AlIngresar3000EnCuentaNuevaElSaldoEs3000()  {
         Cuenta c = new Cuenta();
         c.ingreso(3000);
         assertEquals(3000, c.getSaldo());
@@ -590,7 +590,7 @@ Hasta ahora, necesitábamos una cuenta vacía, virgen, y nos bastaba con `new Cu
 Ahora necesitamos una cuenta con saldo 100. Tenemos que pensar cómo hacer que una cuenta tenga saldo 100. Volvemos a tener que tomar una decisión de diseño.  
 
 Varias opciones:
-- Un nuevo método: setSaldo().
+- Un nuevo método: `setSaldo()`.
 - Utilizar el método ingreso ya existente.
 - Usar un parámetro en el constructor para indicar el saldo inicial.
 
@@ -599,13 +599,12 @@ No me quiero complicar si no hay tests que me lo exijan. Así que me quedo con e
 ```java
     @Test
 	@DisplayName("Al ingresar 3000 en Cuenta con 100 el Saldo es 3100")
-	 void AlIngresar3000EnCuentaCon100ElSaldoEs3100()
-	    {
-	        Cuenta c = new Cuenta();
-	        c.ingreso(100);
-	        c.ingreso(3000);
-	        assertEquals(3100, c.getSaldo());
-	    }
+	 void AlIngresar3000EnCuentaCon100ElSaldoEs3100(){
+        Cuenta c = new Cuenta();
+        c.ingreso(100);
+        c.ingreso(3000);
+        assertEquals(3100, c.getSaldo());
+	}
 ```
 
 Ejecutamos los test. 
@@ -637,7 +636,7 @@ A lo mejor hubiéramos preferido la solución con `setSaldo()` o la del parámet
 Hemos acabado con los tests de la especificaciones principal de la funcionalidad de ingreso.  
 Seguimos con el resto de especificaciones de dicha funcionalidad.
 
-#### Test #6: Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0
+#### Test #5: Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0
 
 **Ingresos.**  
 ...
@@ -650,12 +649,11 @@ Convertimos el ejemplo en un test:
 ```java
     @Test
 	@DisplayName("No se puede ingresar Cantidad Negativa")
-	 void NoSePuedeIngresarCantidadNegativa()
-	    {
-	        Cuenta c = new Cuenta();
-	        c.ingreso(-100);
-	        assertEquals(3100, c.getSaldo());
-	    }
+	 void NoSePuedeIngresarCantidadNegativa() {
+        Cuenta c = new Cuenta();
+        c.ingreso(-100);
+        assertEquals(3100, c.getSaldo());
+    }
 ```
 
 Los nombres de los tests, mejor la especificación que el ejemplo en sí.
@@ -663,8 +661,8 @@ El test falla.
 Paso 2: escribir el código:
 
 ```java 
-public void ingreso(float cantidad){
- 	 if(cantidad < 0){
+    public void ingreso(float cantidad){
+ 	if(cantidad < 0){
             this.saldo = 0;
         } else {
             this.saldo += cantidad;
@@ -683,26 +681,25 @@ Voy a dejar este fallo como si no nos hubiéramos dado cuenta. En el futuro, en 
 No observamos nada que refactorizar, seguimos con el resto de casos
 
 
-#### Test #7, #8, #9, #10
+#### Test #6, #7, #8, #9 - Categoría DECIMALES
 
 ***Ingresos***
 - Los ingresos admiten un máximo de 2 decimales de precisión
-  - Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45
-  - Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
-  - La cantidad máxima que se puede ingresar es de 6000
-  -Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
-  - Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0   
+  6. Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45
+  7. Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
+- La cantidad máxima que se puede ingresar es de 6000
+  8. Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
+  9. Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0   
 
 Tests:
 ```java
     @Test
 	@DisplayName("Ingreso Cantidad con 2 Decimales")
-	 void IngresoCantidad2Decimales()
-	    {
-	        Cuenta c = new Cuenta();
-	        c.ingreso(100.45);
-	        assertEquals(100.45, c.getSaldo());
-	    }
+	 void IngresoCantidad2Decimales() {
+        Cuenta c = new Cuenta();
+        c.ingreso(100.45);
+        assertEquals(100.45, c.getSaldo());
+    }
 ```
 
 Ejecuto el test y... falla. El paso 1 de TDD dice que tengo que escribir un test que falle.   
@@ -865,7 +862,7 @@ Ejecutamos. El test falla. Precisamente ocurre lo que el usuario ha reportado qu
 **TDD - Paso 2. Hacer que el test Pase.**
 
 ```java    
-    private void validarCantidadTransferencia(cantidad){        
+    void validarCantidadTransferencia(cantida){        
         if(cantidad < 0) {
             return false;
         }
@@ -880,7 +877,6 @@ Ejecutamos. El test falla. Precisamente ocurre lo que el usuario ha reportado qu
         
         return true;
     }
-
 }
 ```
 
@@ -918,7 +914,7 @@ Hemos vuelto a hacer ATDD y ya tenemos un ejemplo concreto para convertirlo en u
 **TDD - Paso 1. Escribimos el test.**
 
 ```java
-@Test
+    @Test
 	@DisplayName("")
 	public void ingresoMasDe6000NoEsValidoAlIngresar7000EnCuentaCon2350ElSaldoSeQuedaEn2350(){
         //Arrange
@@ -945,7 +941,6 @@ Ejecutamos. El test falla. Precisamente ocurre lo que el usuario ha reportado qu
             this.saldo += cantidad;
         }
     }
-}
 ```
 
 Ejecutamos. ¡¡¡Pasa todos los tests!!!   
