@@ -624,19 +624,22 @@ public class Cuenta {
 ```
 
 
-Ejecutamos los tests, y pasan.
-Además ya estamos tranquilos porque el código ahora es como nuestro sentido común decía que tenía que ser.
-A lo mejor hubiéramos preferido la solución con `setSaldo()` o la del parámetro en el constructor. No pasa nada, Sería un código un poquito más grande, pero igualmente robusto.
-Hemos acabado con los tests de la especificaciones principal de la funcionalidad de ingreso.
+Ejecutamos los tests, y pasan.  
+Además ya estamos tranquilos porque el código ahora es como nuestro sentido común decía que tenía que ser.  
+A lo mejor hubiéramos preferido la solución con `setSaldo()` o la del parámetro en el constructor. No pasa nada, Sería un código un poquito más grande, pero igualmente robusto.  
+Hemos acabado con los tests de la especificaciones principal de la funcionalidad de ingreso.  
 Seguimos con el resto de especificaciones de dicha funcionalidad.
 
-#### Test #6
+#### Test #6: Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0
 
-Ingresos.(...)
-No se pueden hacer ingresos negativos
-Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0
-(...)
-Convertimos el ejemplo en un test:
+**Ingresos.**  
+...
+- No se pueden hacer ingresos negativos
+  - Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0  
+
+...   
+
+Convertimos el ejemplo en un test:   
 ```java
     @Test
 	@DisplayName("No se puede ingresar Cantidad Negativa")
@@ -649,9 +652,10 @@ Convertimos el ejemplo en un test:
 ```
 
 Los nombres de los tests, mejor la especificación que el ejemplo en sí.
-El test falla. Paso 2, escribir el código:
+El test falla.   
+Paso 2: escribir el código:
 
-``` 
+```java 
 public void ingreso(float cantidad){
  	 if(cantidad < 0){
             this.saldo = 0;
@@ -661,25 +665,28 @@ public void ingreso(float cantidad){
 	}
 ```
 
-Pasa los tests. Ese this.saldo = 0; chirría, debería venir algún test para quitar esa ambigüedad, pero si echamos un vistazo, no lo hay. Deberíamos entonces avisar de que faltan ejemplos en las especificaciones para que sea del todo robusto.
-¿Por qué no lo programamos bien directamente (al fin y al cabo sabemos cómo debe ser) y nos olvidamos?
-La respuesta es que si no tenemos una batería de test completa, en el futuro alguien puede hacer cambios en el código, refactorizaciones, etc, y podría volver a introducir el this.saldo = 0;, ejecutar los tests, ver que pasan todos, y dar por bueno ese código. Si aplicamos TDD hay que conseguir una batería de tests que no dejan cabida a la ambigüedad. Esto se consigue con experiencia, y sobretodo, sin programar más funcionalidad de la que pida cada test.
-Voy a dejar este fallo como si no nos hubiéramos dado cuenta. En el futuro, en producción, el cliente lo detectará y tendremos un bug que corregir. Y lo corregiremos siguiendo la técnica TDD.
-No observamos nada que refactorizar, seguimos con el resto de casos:
+Pasa los tests. 
+
+Ese `this.saldo = 0;` chirría, debería venir algún test para quitar esa ambigüedad, pero si echamos un vistazo, no lo hay. Deberíamos entonces avisar de que faltan ejemplos en las especificaciones para que sea del todo robusto.   
+¿Por qué no lo programamos bien directamente? (al fin y al cabo sabemos cómo debe ser) y nos olvidamos.   
+
+La respuesta es que si no tenemos una batería de test completa, en el futuro alguien puede hacer cambios en el código, refactorizaciones, etc, y podría volver a introducir el`this.saldo = 0;`, ejecutar los tests, ver que pasan todos, y dar por bueno ese código. Si aplicamos TDD hay que conseguir una batería de tests que no dejan cabida a la ambigüedad. **Esto se consigue con experiencia, y sobretodo, sin programar más funcionalidad de la que pida cada test**.
+
+Voy a dejar este fallo como si no nos hubiéramos dado cuenta. En el futuro, en producción, el cliente lo detectará y tendremos un bug que corregir. Y lo corregiremos siguiendo la técnica TDD.   
+No observamos nada que refactorizar, seguimos con el resto de casos
 
 
 #### Test #7, #8, #9, #10
 
-Seguimos
-Ingresos. (...)
-Los ingresos admiten un máximo de 2 decimales de precisión
-Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45
-Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
-La cantidad máxima que se puede ingresar es de 6000
-Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
-Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0
-Tests
+***Ingresos***
+- Los ingresos admiten un máximo de 2 decimales de precisión
+  - Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45
+  - Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
+- La cantidad máxima que se puede ingresar es de 6000
+  -Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
+  - Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0   
 
+Tests:
 ```java
     @Test
 	@DisplayName("Ingreso Cantidad con 2 Decimales")
@@ -691,16 +698,16 @@ Tests
 	    }
 ```
 
-Ejecuto el test y... falla. El paso 1 de TDD dice que tengo que escribir un test que falle.
-Ojo! Con un Lenguaje de Tipado dinámico puede no fallar, ya que no haría distinción entre enteros y decimales. Java y la mayoría de lenguajes de tipado estático obliga con este test a ir al código y cambiar el tipo de dato de int a float.
+Ejecuto el test y... falla. El paso 1 de TDD dice que tengo que escribir un test que falle.   
+Ojo! Con un Lenguaje de Tipado dinámico puede no fallar, ya que no haría distinción entre enteros y decimales. Java y la mayoría de lenguajes de tipado estático obliga con este test a ir al código y cambiar el tipo de dato de int a float.   
 Lo corregimos, pasamos el test y refactorizamos (nada en este caso) y continuamos con el siguiente test
 
-Seguimos.
+Seguimos.   
 Haremos los 3 tests que quedan rápidamente. No aportan nada didáctico nuevo.
-Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
-Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
-Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0
-Tests
+- Si ingreso 100.457 en una cuenta vacía, el saldo es de 0
+- Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00
+- Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0  
+Tests:
 ```java
    @Test
    @DisplayName("Ingreso de Cantidad de más de 2 Decimales No EsValido")
@@ -727,11 +734,11 @@ Tests
     }
  
 ```    
-Código final
+Código final:
 ```java
 public class Cuenta {
  
-	private floatsaldo;
+	private float saldo;
 	
 	public Cuenta() { this.saldo=0;}
 	
@@ -740,17 +747,15 @@ public class Cuenta {
 	}
 	
 	public void ingreso(float cantidad){
-        if(round(cantidad, 2)!=cantidad){ this.saldo = 0;
-        }elseif(cantidad < 0){            this.saldo = 0;
-        }elseif(cantidad > 6000.00){      this.saldo = 0;
-        } else {                          this.saldo += cantidad;
-        }
+        if(round(cantidad, 2)!=cantidad){ this.saldo = 0; }
+        elseif(cantidad < 0){ this.saldo = 0; }
+        elseif(cantidad > 6000.00){ this.saldo = 0; } else { this.saldo += cantidad;  }
 	}
 }
 ```
 
 Paso 2, los tests pasan.
-Paso 3. Refactorizar. La función ingreso() empieza a tener más líneas de control que de lo que realmente hace. Me pide refactorizar. Voy a crear un método privado de validación
+Paso 3. Refactorizar. La función `ingreso()` empieza a tener más líneas de control que de lo que realmente hace. Me pide refactorizar. Voy a crear un método privado de validación
 
 ```java    
     public void ingreso(float cantidad){
@@ -779,46 +784,58 @@ Paso 3. Refactorizar. La función ingreso() empieza a tener más líneas de cont
     }
 ```
 
-Vuelvo a ejecutar los tests. ¡¡¡Y pasan!!! Mi código hace exactamente lo mismo que antes. TDD da una seguridad muy grande a la hora de afrontar cambios o refactorizaciones.
+Vuelvo a ejecutar los tests. ¡¡¡Y pasan!!! Mi código hace exactamente lo mismo que antes. TDD da una seguridad muy grande a la hora de afrontar cambios o refactorizaciones.  
  
-Los tests como parte de la documentación
-Importancia de los nombres de los tests
-Importancia de que cada tests se dedique a una única especificación
+**Los tests como parte de la documentación**
+- Importancia de los nombres de los tests
+- Importancia de que cada tests se dedique a una única especificación
  
-Ya hemos acabado con la funcionalidad de ingreso.
-Ahora tocarían la de retirada y la de transferencia.
-Turno de la familia 1daw3
+Ya hemos acabado con la funcionalidad de **ingreso**.
+Ahora tocarían la de **retirada** y la de **transferencia**.
+
+```diff
+- Turno de la familia 1daw3
+```
 
 ## Test Driven Bug Fixing
 
-Hace tiempo que acabamos el desarrollo de nuestra aplicación y está funcionando en producción sin problemas.
-Pero un día llega nuestro cliente super preocupado. La aplicación no va. Dice que las transferencias no funcionan bien.
-Como bien sabemos por experiencia, para poder corregir un bug, necesitamos reproducirlo. Así, que le pedimos al cliente que nos diga cómo ha sido alguno de los casos en los que ha ocurrido el fallo.
-Nos cuenta que un usuario ha intentado transferir 2500 teniendo solamente 2350 de saldo. Al emisor no se le ha quitado el dinero (bien) pero el receptor ha recibido dinero (mal).
-Nuestro primer impulso es ir al código, a la función transferencia, y mirarla para ver si descubrimos el fallo. ¡¡¡Error!!!* eso no es TDD. Para corregir el bug siguiendo TDD hay que seguir la técnica denominada Test Driven Bug Fixing (Corrección de Bugs Guíado por Tests). Esto no es más que hacer lo que hemos estado haciendo durante todo el proyecto:
-Escribir un test que falle
-Escribir el código que haga pasar el test
-Refactorizar.
+Hace tiempo que acabamos el desarrollo de nuestra aplicación y está funcionando en producción sin problemas.   
+Pero un día llega nuestro cliente super preocupado. La aplicación no va. Dice que las transferencias no funcionan bien.  
+Como bien sabemos por experiencia, **para poder corregir un bug, necesitamos reproducirlo**. Así, que le pedimos al cliente que nos diga cómo ha sido alguno de los casos en los que ha ocurrido el fallo.  
+
+>Un usuario ha intentado transferir 2500 teniendo solamente 2350 de saldo. Al emisor no se le ha quitado el dinero (bien) pero el receptor ha recibido dinero (mal).
+
+Nuestro primer impulso es ir al código, a la función transferencia, y mirarla para ver si descubrimos el fallo. **¡¡¡Error!!!** eso no es TDD.  
+
+Para corregir el bug siguiendo TDD hay que seguir la técnica denominada **Test Driven Bug Fixing** (Corrección de Bugs Guíado por Tests). Esto no es más que hacer lo que hemos estado haciendo durante todo el proyecto:  
+- Escribir un test que falle
+- Escribir el código que haga pasar el test
+- Refactorizar.
+
 Lo primero es verificar con el cliente qué debe hacer exactamente la aplicación en ese caso que no está funcionando.
-"Si un usuario con 2350 transfiere 2500 a otro usuario con saldo 50 ¿cuál debería ser el resultado?
-"Como no se puede hacer esa transferencia porque el usuario no emisor no tiene suficiente saldo. Los saldos deberían quedarse como están."
-"O. Entonces, si un usuario con 2350 transfiere 2500 a otro usuario con saldo 50, el saldo del emisor debería seguir siendo 2350 y el del receptor debería seguir siendo 50 ¿correcto?
-"Correcto, así debe ser"
-Hemos vuelto a hacer ATDD y ya tenemos un ejemplo concreto para convertirlo en un test.
-TDD - Paso 1. Escribimos el test.
+>Si un usuario con 2350 transfiere 2500 a otro usuario con saldo 50 ¿cuál debería ser el resultado? Como no se puede hacer esa transferencia porque el usuario emisor no tiene suficiente saldo, los saldos deberían quedarse como están.
+
+O. Entonces, si un usuario con 2350 transfiere 2500 a otro usuario con saldo 50, el saldo del emisor debería seguir siendo 2350 y el del receptor debería seguir siendo 50 ¿correcto?
+
+> "Correcto, así debe ser"
+
+Hemos vuelto a hacer ATDD y ya tenemos un ejemplo concreto para convertirlo en un test.  
+**TDD - Paso 1. Escribimos el test.**
 
 ```java
+    @Test
+    @DisplayName("")
     public void NoSePuedeTransferirMasSaldoDelDisponible(){
         cuenta1 = new Cuenta();
-        cuenta1ingreso(2350);
+        cuenta1.ingreso(2350);
         
         cuenta2 = new Cuenta();
-        cuenta2->ingreso(300);
+        cuenta2.ingreso(300);
         
-        cuenta1transferencia(cuenta2,2500);
+        cuenta1.transferencia(cuenta2,2500);
 
-        assertEquals(2350, cuenta1getSaldo());
-        assertEquals(300, cuenta2->getSaldo());
+        assertEquals(2350, cuenta1.getSaldo());
+        assertEquals(300, cuenta2.getSaldo());
     }
 ```
 
