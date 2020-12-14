@@ -9,7 +9,6 @@ Ideas de:
 
 **INDICE**    
 
-**Índice**   
 1. [TDD](#tdd)
 1. [Framework de Testeo](#fw)
 1. [ATDD](#atdd)
