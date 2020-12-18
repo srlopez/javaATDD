@@ -1,7 +1,6 @@
 
 **INDICE**    
 
-1. [Ejemplo ATDD](#eatdd)
 1. [Práctica ATDD](#epatdd)
 1. [Ejemplo Test 1](#t1)
 1. [Ejemplo Test 2](#t2)
@@ -18,70 +17,8 @@
 1. [Pro y Contra](#procon)
 1. [Niveles profesionales TDD](#pro)
 
-
-## Ejemplo ATDD<a name="eatdd"></a>
-Enunciado:
-> (...) Antes de proceder al pago, al cliente le saldrá un resumen detallado de los productos que tiene en la cesta,en los que se deberá aplicar el IVA (21%) o el RE (5.2%) al total, en caso de que el cliente requiera sus facturas con IVA o con RE.
-
-Propuesta de especificación para "_mostrar los impuestos en el resumen de la factura_".   
-[Especificación](https://es.wikipedia.org/wiki/Especificaci%C3%B3n_de_requisitos_de_software). 
-¡¡¡Muy importante entender esto.!!!
-
-Propuesta del programador:
-Si un cliente con _IVA_ y con _RE_ elige un producto de 100€, entonces en el detalle de la factura se le mostrará:  
-▸ Precio antes de impuestos: 100€  
-▸ IVA: 21€  
-▸ RE: 6.292€  
-▸ Total: 127.29€ 
-
-**Rectificación del cliente** (_en cursiva_) 
-Si un cliente con IVA y con RE elige un producto de 100€, en el detalle de la factura se le mostrará:  
-▸ _Base Imponible_: 100.00€  
-▸ _I.V.A. (21%)_: 21.00€  
-▸ _R.E. (5.2%)_: _5.20€_  
-▸ Total: _126.20€_ 
-
-**RESUMEN de Propuestas y Rectificaiones**  
-**Programador (a la izda) y cliente (a la dcha).**
-
-Cliente con IVA y con RE: | Cliente con IVA y con RE:
---|--
-▸ Base Imponible: 100.00€ | ▸ Base Imponible: 100.00€ 
-▸ I.V.A. (21%): 21.00€ | ▸ I.V.A. (21%): 21.00€ 
-▸ R.E. (5.2%): 5.20€ | ▸ R.E. (5.2%): 5.20€ 
-▸ Total: 126.20€ | ▸ Total: 126.20€ 
-
-
-Cliente con IVA y sin RE: | Cliente con IVA y sin RE:
--- | --
-▸ Base Imponible: 100.00€  | ▸ Base Imponible: 100.00€ 
-▸ I.V.A. (21%): 21.00€  | ▸ I.V.A. (21%): 21.00€ 
-▸ R.E. (0%): 0.00€  |   ▸ Total: 121.00€
-▸ Total: 121.00€ | 
-
-
-Cliente sin IVA y con RE:  | Cliente sin IVA y con RE: 
--- | --
-▸ Base Imponible: 100.00€  | ▸ Base Imponible: 100.00€ 
-▸ R.E. (5.2%): 5.20€  | ▸ I.V.A (0%): 0.00€ 
-▸ Total: 105.20€ | ▸ R.E. (5.2%): 5.20€ 
-▸    | ▸ Total: 105.20€
-
-
-Cliente sin IVA y sin RE: | Cliente sin IVA y sin RE: 
--- | --
-▸ Base Imponible: 100.00€  | ▸ Base Imponible: 100.00€ 
-▸ Total: 100.00€  | ▸ I.V.A (0%): 0.00€ 
-▸   | ▸ Total: 100.00€
-
-**VB (Visto Bueno Cliente)**
-
-Genial. Ya tenemos 4 tests de aceptación para la funcionalidad de "mostrar los impuestos en el resumen de la factura". 
-Otras consideraciones:  
-Otra ventaja de dirigir el desarrollo por los ejemplos, es que vamos a poder comprobar muy rápido si el programa está cumpliendo los objetivos o no. Conocemos en qué punto estamos y cómo vamos progresando. El Dueño de Producto puede revisar los tests de aceptación y ver cuántos se están cumpliendo, así que nuestro trabajo gana una confianza tremenda.
-
  
-## Ejemplo Práctico ATDD<a name="epatdd"></a>
+## Práctica ATDD<a name="epatdd"></a>
 Supongamos que un cliente nos contrata con este enunciado:
 > "Quiero lanzar una aplicación monedero para el pago entre amigos. Cada usuario tendrá una cuenta con saldo. La idea es que se puedan hacer transferencias a tus amigos directamente desde la app. La aplicación permitirá al usuario ingresar dinero o retirarlo cuando quiera."
 
