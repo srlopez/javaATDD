@@ -9,8 +9,8 @@ Ideas de:
 
 **INDICE**    
 
+1. [Pruebas Unitarias/Test](#test)
 1. [TDD](#tdd)
-1. [Framework de Testeo](#fw)
 1. [ATDD](#atdd)
 1. [Ejemplo ATDD](#eatdd)
 1. [Práctica ATDD](#epatdd)
@@ -30,42 +30,20 @@ Ideas de:
 
 
 
+## Pruebas Unitarias <a name="test"></a>
+Fuente: [Wikipedia](https://es.wikipedia.org/wiki/Prueba_unitaria)  
+En programación, una prueba unitaria es una *forma de comprobar el correcto funcionamiento de una unidad de código*. Por ejemplo en diseño estructurado o en diseño funcional una *función* o un *procedimiento*, en diseño orientado a objetos una *clase* y sus *método*. 
 
+Objetivo del Test:
+- Asegurar que cada unidad funcione correctamente y eficientemente por separado.(Caja negra)
+- Verificar que el código hace lo que tiene que hacer (Caja blanca).
+- Verificación semántica de nombres, 
+- Los nombres y tipos de los parámetros, el tipo de lo que se devuelve
+- Y si el estado inicial es válido, entonces el estado final es válido también.
 
-## TDD<a name="tdd"></a>
-Es una práctica de ingeniería de software que involucra otras dos prácticas: 
-- Escribir las pruebas primero (Test First Development) y 
-- Refactorización (Refactoring). 
-Fuente: Wikipedia (https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas)
+La idea es escribir casos de prueba para cada función no trivial o método en el módulo, de forma que cada caso sea independiente del resto. Luego, con las Pruebas de Integración, se podrá asegurar el correcto funcionamiento del sistema o subsistema en cuestión.
 
-Objetivos del TDD 
-- Minimizar el número de bugs. 
-- Implementar las funcionalidades justas que el cliente necesita y no más. 
-- Producir software modular, altamente reutilizable y preparado para el cambio. 
-
-Flujo de TDD
-- Requisitos -> Pruebas -> Programación vs Requisitos->Analisis->Desarrollo->Pruebas g->Pruebas b
-
-Algoritmo TDD 
-- Escribir un test que falle. 
-- Escribir el mínimo código necesario para pasar los tests. 
-- Refactorizar 
-Este algoritmo también se conoce como algoritmo Red-Green-Refact
-
-Patron **AAA** de toda Prueba /// Given, When, Then
-- Arrange (set up). Preparación de los elementos sobre los que vamos a realizar el test
-- Act. En esta parte se ejecuta la acción (o acciones) que se desea(n) poner a prueba
-- Assert. En esta parte, se realiza la comprobación (o comprobaciones) pertinentes para verificar que la parte Act funciona como debe.
-
-lo puedes ver tambien como **GWT**, Given, When, Then (https://phauer.com/2019/modern-best-practices-testing-java/)  
-Una prueba debe contener tres bloques que estén separados por una línea vacía. Cada bloque de código debe ser lo más corto posible. Use subeventos para acortar estos bloques.
-
-- Given(Input): La preparación de la prueba como la creación de datos o la configuración de las burlas
-- When(Acción): Llama al método o acción que te gusta probar
-- Then (Salida): Ejecutar aseveraciones para verificar la salida o el comportamiento correcto de la acción.
-
-
-## Frameworks de testeo <a name="fw"></a>
+### Frameworks de testeo <a name="fw"></a>
 Permiten programar tests de manera muy sencilla.  
 Cada lenguaje de programación tiene uno o más frameworks profesionales de testeo.  
 Algunos de los más conocidos son: NUnit, xUnit, **JUnit**, PhpUnit, etc... 
@@ -78,10 +56,41 @@ Como aserciones podemos utilizar varios tipos en JUnit5, ej:
 pero con `assertEquals` podemos avanzar esta introducción.
 
 
+## TDD<a name="tdd"></a>
+Es una práctica de ingeniería de software que involucra otras dos prácticas: 
+- Escribir las pruebas primero (Test First Development) y 
+- Refactorización (Refactoring). 
+Fuente: [Wikipedia](https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas)
+
+### Objetivos del TDD 
+- Minimizar el número de errores/bugs. 
+- Implementar las funcionalidades justas que el cliente necesita y no más. 
+- Producir software modular, altamente reutilizable y preparado para el cambio. 
+
+### Flujo de TDD
+- Requisitos -> Pruebas -> Programación vs Requisitos->Analisis->Desarrollo->Pruebas g->Pruebas b
+
+### Algoritmo TDD 
+- Escribir un test que falle. 
+- Escribir el mínimo código necesario para pasar los tests. 
+- Refactorizar 
+Este algoritmo también se conoce como algoritmo Red-Green-Refact
+
+### Patron  **AAA** de toda Prueba 
+- Arrange (set up). Preparación de los elementos sobre los que vamos a realizar el test
+- Act. En esta parte se ejecuta la acción (o acciones) que se desea(n) poner a prueba
+- Assert. En esta parte, se realiza la comprobación (o comprobaciones) pertinentes para verificar que la parte Act funciona como debe.
+
+Lo puedes ver tambien como **GWT**, [Given, When, Then](https://phauer.com/2019/modern-best-practices-testing-java/), en el que una prueba debe contener tres bloques que estén separados por una línea vacía. Cada bloque de código debe ser lo más corto posible. Use subeventos para acortar estos bloques.
+
+- Given(Input): La preparación de la prueba como la creación de datos o la configuración de las burlas
+- When(Acción): Llama al método o acción que te gusta probar
+- Then (Salida): Ejecutar aseveraciones para verificar la salida o el comportamiento correcto de la acción.
+
 
 ## ATDD como Punto de partida para TDD<a name="atdd"></a>
 - Son listados de ejemplos ejecutables 
-- Escritos por los dueños del producto (o al menos validados por ellos) 
+- Escritos por los dueños del producto( ;)SCRUM) (o al menos validados por ellos) 
 - Se centran en el qué y no en el cómo 
 - Ejemplos concretos y certeros 
 - Permiten comprobar muy rápido si el programa está cumpliendo los objetivos o no.
@@ -90,25 +99,26 @@ pero con `assertEquals` podemos avanzar esta introducción.
 Enunciado:
 > (...) Antes de proceder al pago, al cliente le saldrá un resumen detallado de los productos que tiene en la cesta,en los que se deberá aplicar el IVA (21%) o el RE (5.2%) al total, en caso de que el cliente requiera sus facturas con IVA o con RE.
 
-Propuesta de especificación para "mostrar los impuestos en el resumen de la factura". 
-Ver https://es.wikipedia.org/wiki/Especificaci%C3%B3n_de_requisitos_de_software. 
+Propuesta de especificación para "_mostrar los impuestos en el resumen de la factura_".   
+[Especificación](https://es.wikipedia.org/wiki/Especificaci%C3%B3n_de_requisitos_de_software). 
 ¡¡¡Muy importante entender esto.!!!
 
-Si un cliente con IVA y con RE elige un producto de 100€, en el detalle de la factura se le mostrará:  
+Propuesta del programador:
+Si un cliente con _IVA_ y con _RE_ elige un producto de 100€, entonces en el detalle de la factura se le mostrará:  
 ▸ Precio antes de impuestos: 100€  
 ▸ IVA: 21€  
 ▸ RE: 6.292€  
 ▸ Total: 127.29€ 
 
-**Rectificación del cliente**  
+**Rectificación del cliente** (_en cursiva_) 
 Si un cliente con IVA y con RE elige un producto de 100€, en el detalle de la factura se le mostrará:  
-▸ Base Imponible: 100.00€  
-▸ I.V.A. (21%): 21.00€  
-▸ R.E. (5.2%): 5.20€  
-▸ Total: 126.20€ 
+▸ _Base Imponible_: 100.00€  
+▸ _I.V.A. (21%)_: 21.00€  
+▸ _R.E. (5.2%)_: _5.20€_  
+▸ Total: _126.20€_ 
 
-
-**Propuestas (a la izda) y Rectificaciónes del cliente (a la dcha).**
+**RESUMEN de Propuestas y Rectificaiones**  
+**Programador (a la izda) y cliente (a la dcha).**
 
 Cliente con IVA y con RE: | Cliente con IVA y con RE:
 --|--
