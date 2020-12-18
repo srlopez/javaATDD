@@ -61,15 +61,15 @@ Fuente: [Wikipedia](https://es.wikipedia.org/wiki/Desarrollo_guiado_por_pruebas)
 Este algoritmo también se conoce como algoritmo Red-Green-Refact
 
 ### Patron  **AAA** de toda Prueba 
-- Arrange (set up). Preparación de los elementos sobre los que vamos a realizar el test
-- Act. En esta parte se ejecuta la acción (o acciones) que se desea(n) poner a prueba
-- Assert. En esta parte, se realiza la comprobación (o comprobaciones) pertinentes para verificar que la parte Act funciona como debe.
+- **Arrange** (set up). Preparación de los elementos sobre los que vamos a realizar el test
+- **Act**. En esta parte se ejecuta la acción (o acciones) que se desea(n) poner a prueba
+- **Assert**. En esta parte, se realiza la comprobación (o comprobaciones) pertinentes para verificar que la parte Act funciona como debe.
 
 Lo puedes ver tambien como **GWT**, [Given, When, Then](https://phauer.com/2019/modern-best-practices-testing-java/), en el que una prueba debe contener tres bloques que estén separados por una línea vacía. Cada bloque de código debe ser lo más corto posible. Use subeventos para acortar estos bloques.
 
-- Given(Input): La preparación de la prueba como la creación de datos o la configuración de las burlas
-- When(Acción): Llama al método o acción que te gusta probar
-- Then (Salida): Ejecutar aseveraciones para verificar la salida o el comportamiento correcto de la acción.
+- **Given**(Input): La preparación de la prueba como la creación de datos o la configuración de las burlas
+- **When**(Acción): Llama al método o acción que te gusta probar
+- **Then** (Salida): Ejecutar aseveraciones para verificar la salida o el comportamiento correcto de la acción.
 
 
 ## ATDD  (Acceptance Test Driven Development) como Punto de partida para TDD<a name="atdd"></a>

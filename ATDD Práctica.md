@@ -138,12 +138,6 @@ Empezaremos con la primera funcionalidad, con el primer test de la misma:
 
 **Toca el paso 1. El test que falla**
 
-```diff
--Shock!!!!
-- Enfrentarse a la escritura del primer test es una experiencia muy curiosa que nos encontramos al aventurarnos en el mundo del TDD. No tenemos nada, ni clases, ni métodos, ni nombres de archivos, pero tenemos que escribir un test que utilice todo eso que no existe. Esto no tiene sentido, es como empezar por el final.
-+ Efectivamente, es lo que vimos en la definición de TDD y en cómo es el flujo de trabajo, primero el test, luego el código. Es chocante, pero una vez cambiado el chip, las cosas fluyen, y hasta alguno se divierte.
-```
-
 Hay que testear que al crear una cuenta, el saldo es 0.  
 Escribe un test que cree una cuenta y haga un `assert` para comprobar que el saldo es 0.
 En JUnit5 Utilizaremos la anotaciones de `@Test` y `@DisplayName`
