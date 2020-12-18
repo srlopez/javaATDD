@@ -1,4 +1,4 @@
-# Introducción a ATDD (Acceptance Test Driven Development) y Junit5
+# Introducción a Test/TDD/ATDD y Junit5
 
 Ideas de:
 - http://www.chuidiang.org/java/herramientas/test-automaticos/tdd-test-driven-development.php
@@ -14,7 +14,7 @@ Ideas de:
 1. [ATDD](#atdd)
 
 
-## Pruebas Unitarias <a name="test"></a>
+## Pruebas Unitarias (Unit Tests) <a name="test"></a>
 Fuente: [Wikipedia](https://es.wikipedia.org/wiki/Prueba_unitaria)  
 En programación, una prueba unitaria es una *forma de comprobar el correcto funcionamiento de una unidad de código*. Por ejemplo en diseño estructurado o en diseño funcional una *función* o un *procedimiento*, en diseño orientado a objetos una *clase* y sus *método*. 
 
@@ -40,7 +40,7 @@ Como aserciones podemos utilizar varios tipos en JUnit5, ej:
 pero con `assertEquals` podemos avanzar esta introducción.
 
 
-## TDD<a name="tdd"></a>
+## TDD  (Test Driven Development)<a name="tdd"></a>
 Es una práctica de ingeniería de software que involucra otras dos prácticas: 
 - Escribir las pruebas primero (Test First Development) y 
 - Refactorización (Refactoring). 
@@ -72,7 +72,7 @@ Lo puedes ver tambien como **GWT**, [Given, When, Then](https://phauer.com/2019/
 - Then (Salida): Ejecutar aseveraciones para verificar la salida o el comportamiento correcto de la acción.
 
 
-## ATDD como Punto de partida para TDD<a name="atdd"></a>
+## ATDD  (Acceptance Test Driven Development) como Punto de partida para TDD<a name="atdd"></a>
 - Son listados de ejemplos ejecutables 
 - Escritos por los dueños del producto( ;)SCRUM) (o al menos validados por ellos) 
 - Se centran en el qué y no en el cómo 
