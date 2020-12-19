@@ -71,6 +71,9 @@ Lo puedes ver tambien como **GWT**, [Given, When, Then](https://phauer.com/2019/
 - **When**(Acción): Llama al método o acción que te gusta probar
 - **Then** (Salida): Ejecutar aseveraciones para verificar la salida o el comportamiento correcto de la acción.
 
+### Ejemplos
+[Ejemplos TDD](https://github.com/junit-team/junit5-samples/blob/r5.6.1/junit5-jupiter-starter-maven/src/test/java/com/example/project/CalculatorTests.java) 
+
 
 ## ATDD  (Acceptance Test Driven Development) como Punto de partida para TDD<a name="atdd"></a>
 - Son listados de ejemplos ejecutables 
