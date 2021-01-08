@@ -71,46 +71,46 @@ Antes es conveniente que se hayan ordenado por funcionalidad, agrupando todos lo
 #### The List II
 **Creación de cuentas.**
 - Las cuentas siempre se crean con saldo 0. Hay que hacer algún ingreso después si se quiere tener saldo:
-  1. Al crear cuenta el saldo es cero
+  `test#1`. Al crear cuenta el saldo es cero
   
 **Ingresos.**
 - Suman la cantidad ingresada al saldo.
 - No hay comisiones ni nada por el estilo.   
-  2. Al ingresar 100 en cuenta vacía el saldo es 100  
-  3. Al ingresar 3000 en cuenta vacía el saldo es 3000  
-  4. Al ingresar 3000 en cuenta con 100 el saldo es 3100  
+  `test#2`. Al ingresar 100 en cuenta vacía el saldo es 100  
+  `test#3`. Al ingresar 3000 en cuenta vacía el saldo es 3000  
+  `test#4`. Al ingresar 3000 en cuenta con 100 el saldo es 3100  
 - No se pueden hacer ingresos negativos  
-  5.  Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0  
+  `test#5`.  Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0  
 - Los ingresos admiten un máximo de 2 decimales de precisión  
-  6. Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45  
-  7. Si ingreso 100.457 en una cuenta vacía, el saldo es de 0  
+  `test#6`. Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45  
+  `test#7`. Si ingreso 100.457 en una cuenta vacía, el saldo es de 0  
 - La cantidad máxima que se puede ingresar es de 6000  
-  8. Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00  
-  9. Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0  
+  `test#8`. Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00  
+  `test#9`. Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0  
   
-**Retiradas.** (no sigo numerando...)  
+**Retiradas.** 
 - Restan la cantidad ingresada al saldo.
-- No hay comisiones ni nada por el estilo.
-  - Al retirar 100 en cuenta con 500 el saldo es 400
-- No se puede retirar una cantidad mayor a la del saldo disponible
-  - Si retiro 500 en cuenta con 200 no ocurre nada y el saldo sigue siendo 200
-- No se pueden retirar cantidades negativas
-  - Si retiro -100 en cuenta con 500 no ocurre nada y el saldo sigue siendo 500
-- Las cantidades admiten un máximo de 2 decimales de precisión
-  - Al retirar 100.45 en cuenta con 500 el saldo es 399.55
-  - Al retirar 100.457 en cuenta con 500 con 500 no ocurre nada y el saldo sigue siendo 500
-- La cantidad máxima que se puede retirar es de 6000
-  - Si retiro 6000.00 en una cuenta con 7000, el saldo es de 1000
-  - Si retiro 6000.01 en una cuenta con 7000, no ocurre nada y el saldo sigue siendo 7000
+- No hay comisiones ni nada por el estilo.  
+  `test#10`. Al retirar 100 en cuenta con 500 el saldo es 400
+- No se puede retirar una cantidad mayor a la del saldo disponible  
+  `test#11`. Si retiro 500 en cuenta con 200 no ocurre nada y el saldo sigue siendo 200
+- No se pueden retirar cantidades negativas  
+  `test#12`. Si retiro -100 en cuenta con 500 no ocurre nada y el saldo sigue siendo 500
+- Las cantidades admiten un máximo de 2 decimales de precisión  
+  `test#13`. Al retirar 100.45 en cuenta con 500 el saldo es 399.55  
+  `test#14`. Al retirar 100.457 en cuenta con 500 con 500 no ocurre nada y el saldo sigue siendo 500
+- La cantidad máxima que se puede retirar es de 6000  
+  `test#15`. Si retiro 6000.00 en una cuenta con 7000, el saldo es de 1000  
+  `test#16`. Si retiro 6000.01 en una cuenta con 7000, no ocurre nada y el saldo sigue siendo 7000
   
 **Transferencias**
 - Al hacer una transferencia de 100 desde una cuenta con 500 a una con 50, en la primera cuenta el saldo se quedará en 400 y en la segunda se quedará en 150.
-- No se pueden transferir cantidades negativas
-  - Al hacer una transferencia de -100 desde una cuenta con 500 a una con 50, los saldos se quedan en 500 y 50 respectivamente
-- El límite de transferencias en un mismo día desde una misma cuenta es de 3000:
-  - Al hacer una transferencia de 3000 desde una cuenta con 3500 a una con 50, en la primera cuenta el saldo se quedará en 500 y en la segunda se quedará en 3050.
-  - Al hacer una transferencia de 3000.01 desde una cuenta con 3500 a una con 50, en la primera cuenta el saldo se quedará en 3500 y en la segunda se quedará en 50.
-  - Al hacer una transferencia de 2000 desde una cuenta con 3500 a una con 50, y justo después otra de 1200, en la primera cuenta el saldo se quedará en 1500 y en la segunda se quedará en 2050.
+- No se pueden transferir cantidades negativas  
+  `test#17`. Al hacer una transferencia de -100 desde una cuenta con 500 a una con 50, los saldos se quedan en 500 y 50 respectivamente
+- El límite de transferencias en un mismo día desde una misma cuenta es de 3000:  
+  `test#18`. Al hacer una transferencia de 3000 desde una cuenta con 3500 a una con 50, en la primera cuenta el saldo se quedará en 500 y en la segunda se quedará en 3050.  
+  `test#19`. Al hacer una transferencia de 3000.01 desde una cuenta con 3500 a una con 50, en la primera cuenta el saldo se quedará en 3500 y en la segunda se quedará en 50.  
+  `test#20`. Al hacer una transferencia de 2000 desde una cuenta con 3500 a una con 50, y justo después otra de 1200, en la primera cuenta el saldo se quedará en 1500 y en la segunda se quedará en 2050.
 
 Y ahora **sí**, hemos acabado de capturar **las especificaciones**. Con esto ya podemos empezar a escribir tests y a programar siguiendo el **algoritmo TDD** visto con anterioridad. Cada ejemplo marcado en negrita, se convertirá en un test que habrá que pasar posteriormente.
 
@@ -159,7 +159,7 @@ class CuentaTest {
 }
 ```
 
-Tras crear esa clase como **plantilla**, solamente hemos aplicado TDD en _el nombre del test_, que debe ser muy descriptivo, aunque ahora podemos utilizar el `@DisplayName`, todo lo demás forma parte de la elaboración de tests con JUnit.  
+Tras crear esa clase como **plantilla**, solamente hemos aplicado TDD en _el nombre del test_, que debe ser muy descriptivo, **aunque ahora podemos utilizar el** `@DisplayName`, todo lo demás forma parte de la elaboración de tests con JUnit.  
 Escribamos ahora el test. Según la especificación, el test debe:
 - Crear una cuenta
 - Comprobar que el saldo es 0  
@@ -218,7 +218,7 @@ import app.core.Cuenta;
 class CuentaTest {
 	@Test
 	@DisplayName("Al crear una Cuenta el Saldo debe ser Cero")
-	void AlCrearCuentaElSaldoEsCero() {
+	void test01() {
 		Cuenta c = new Cuenta();
 		assertEquals(0, c.getSaldo());
 	}
@@ -280,7 +280,7 @@ Y el test (no olvidemos que los test también se deben refactorizar) tampoco par
 class CuentaTest {
 	@Test
 	@DisplayName("Al crear una Cuenta el Saldo debe ser Cero")
-	void AlCrearCuentaElSaldoEsCero() {
+	void test01() {
 		Cuenta c = new Cuenta();
 		assertEquals(0, c.getSaldo());
 	}
@@ -311,7 +311,7 @@ Convertimos el ejemplo en un test:
 ```java
 	@Test
 	@DisplayName("Al ingresar 100 en Cuenta nueva el Saldo es 100")
-	void alIngresar100EnCuentaNuevaElSaldoEs100(){
+	void test01(){
         Cuenta c = new Cuenta();
         c.ingreso(100);
         assertEquals(100, c.getSaldo());
@@ -383,14 +383,14 @@ class CuentaTest {
  
 	@Test
 	@DisplayName("Al crear una Cuenta el Saldo debe ser Cero")
-	void AlCrearCuentaElSaldoEsCero() {
+	void test01() {
 		Cuenta c = new Cuenta();
 		assertEquals(0, c.getSaldo());
 	}
  
 	@Test
 	@DisplayName("Al ingresar 100 en Cuenta nueva el Saldo es 100")
-	void AlIngresar100EnCuentaNuevaElSaldoEs100() {
+	void test02() {
         Cuenta c = new Cuenta();
         c.ingreso(100);
         assertEquals(100, c.getSaldo());
@@ -410,7 +410,7 @@ Convertimos el ejemplo en un test:
 ```java 
     @Test
 	@DisplayName("Al ingresar 3000 en Cuenta nueva el Saldo es 3000")
-	void AlIngresar3000EnCuentaNuevaElSaldoEs3000()  {
+	void test03()  {
         Cuenta c = new Cuenta();
         c.ingreso(3000);
         assertEquals(3000, c.getSaldo());
@@ -454,7 +454,7 @@ No me quiero complicar si no hay tests que me lo exijan. Así que me quedo con e
 ```java
     @Test
 	@DisplayName("Al ingresar 3000 en Cuenta con 100 el Saldo es 3100")
-	 void AlIngresar3000EnCuentaCon100ElSaldoEs3100(){
+	 void test04(){
         Cuenta c = new Cuenta();
         c.ingreso(100);
         c.ingreso(3000);
@@ -504,7 +504,7 @@ Convertimos el ejemplo en un test:
 ```java
     @Test
 	@DisplayName("No se puede ingresar Cantidad Negativa")
-	 void NoSePuedeIngresarCantidadNegativa() {
+	 void test05() {
         Cuenta c = new Cuenta();
         c.ingreso(-100);
         assertEquals(3100, c.getSaldo());
@@ -540,17 +540,18 @@ No observamos nada que refactorizar, seguimos con el resto de casos
 
 ***Ingresos***
 - Los ingresos admiten un máximo de 2 decimales de precisión  
-  6. Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45  
-  7. Si ingreso 100.457 en una cuenta vacía, el saldo es de 0  
+  `test#6`. Si ingreso 100.45 en una cuenta vacía, el saldo es de 100.45  
+  `test#7`. Si ingreso 100.457 en una cuenta vacía, el saldo es de 0  
 - La cantidad máxima que se puede ingresar es de 6000  
-  8. Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00  
-  9. Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0     
+  `test#8`. Si ingreso 6000.00 en una cuenta vacía, el saldo es de 6000.00  
+  `test#9`. Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0  
+  
 
 Tests:
 ```java
     @Test
 	@DisplayName("Ingreso Cantidad con 2 Decimales")
-	 void IngresoCantidad2Decimales() {
+	 void test06() {
         Cuenta c = new Cuenta();
         c.ingreso(100.45);
         assertEquals(100.45, c.getSaldo());
@@ -568,17 +569,17 @@ Haremos los 3 tests que quedan. No aportan nada didáctico nuevo.
 - Si ingreso 6000.01 en una cuenta vacía, el saldo es de 0  
 Tests:
 ```java
-   @Test
-   @DisplayName("Ingreso de Cantidad de más de 2 Decimales No EsValido")
-   void IngresoCantidadMasDe2DecimalesNoEsValido(){
+ @Test
+    @DisplayName("Ingreso de Cantidad de más de 2 Decimales No EsValido")
+    void test07(){
         Cuenta c = new Cuenta();
         c.ingreso(100.457);
         assertEquals(0, c.getSaldo());
-    }
- 
-    @Test
+	}
+	
+	@Test
     @DisplayName("Ingreso Máximo de 6000")
-    void IngresoMaximoEsDe6000(){
+    void test08(){
         Cuenta c = new Cuenta();
         c.ingreso(6000);
         assertEquals(6000, c.getSaldo());
@@ -586,35 +587,44 @@ Tests:
  
     @Test
     @DisplayName("Ingreso de más de 6000 No Es Valido")
-    void IngresoMasDe6000NoEsValido(){
+    void test09(){
         Cuenta c = new Cuenta();
         c.ingreso(6000.01);
         assertEquals(0, c.getSaldo());
     }
- 
 ```    
 Código final del `core`:
 ```java
 public class Cuenta {
- 
-	private float saldo;
-	
-	public Cuenta() { this.saldo=0;}
-	
-	public int getSaldo() {
+
+	private double saldo;
+
+	public Cuenta() {
+		this.saldo = 0;
+	}
+
+	public double getSaldo() {
 		return this.saldo;
 	}
-	
-	public void ingreso(float cantidad){
-        if(round(cantidad, 2)!=cantidad)
-           { this.saldo = 0; }
-        elseif(cantidad < 0)
-           { this.saldo = 0; }
-        elseif(cantidad > 6000.00)
-           { this.saldo = 0; } 
-        else 
-           { this.saldo += cantidad;  }
-	}
+
+	public void ingreso(double cantidad){
+        Boolean esValida = validarCantidadIngresada(cantidad);
+        if(esValida){ 
+            this.saldo += cantidad;
+        } else {
+            this.saldo = 0;
+        } 
+    }
+    
+    private Boolean validarCantidadIngresada(double cantidad){
+        
+		double c2dec = Math.floor(cantidad * 100) / 100d;
+		if (c2dec != cantidad) return false;
+		if (cantidad < 0) return false;
+		if (cantidad > 6000.00) return false;
+     
+        return true;
+    }
 }
 ```
 
@@ -626,8 +636,8 @@ Paso 3: Refactorizar. La función `ingreso()` empieza a tener más líneas de co
 ```
 
 ```java    
-    public void ingreso(float cantidad){
-        bool esValida = this.validarCantidadIngresada(cantidad);
+    public void ingreso(double cantidad){
+        Boolean esValida = validarCantidadIngresada(cantidad);
         if(esValida){ 
             this.saldo += cantidad;
         } else {
@@ -635,19 +645,13 @@ Paso 3: Refactorizar. La función `ingreso()` empieza a tener más líneas de co
         } 
     }
     
-    private void validarCantidadIngresada(float cantidad){
-        if(round(cantidad, 2)!=cantidad) {
-            return false;
-        }
+    private Boolean validarCantidadIngresada(double cantidad){
         
-        if(cantidad < 0) {
-            return false;
-        }
-        
-        if(cantidad > 6000.00){
-            return false;
-        } 
-        
+		double c2dec = Math.floor(cantidad * 100) / 100d;
+		if (c2dec != cantidad) return false;
+		if (cantidad < 0) return false;
+		if (cantidad > 6000.00) return false;
+     
         return true;
     }
 ```
@@ -716,20 +720,12 @@ Ejecutamos. El test falla. Precisamente ocurre lo que el usuario ha reportado qu
 
 **TDD - Paso 2. Hacer que el test Pase.**
 
-```java    
-    void validarCantidadTransferencia(cantida){        
-        if(cantidad < 0) {
-            return false;
-        }
-        
-        if(cantidad > this.saldo) {
-            return false;
-        }
-        
-        if(cantidad > 3000){
-            return false;
-        } 
-        
+```java   
+    private Boolean  validarCantidadTransferencia(cantida){        
+        if(cantidad < 0) return false;
+        if(cantidad > this.saldo) return false;       
+        if(cantidad > 3000)  return false;
+    
         return true;
     }
 }
