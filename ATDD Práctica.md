@@ -493,22 +493,17 @@ Seguimos con el resto de especificaciones de dicha funcionalidad.
 
 #### Test #5: Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0 <a name="t5"></a>
 
-**Ingresos.**  
-...
-- No se pueden hacer ingresos negativos
-  - Al ingresar -100 en cuenta vacía, el saldo sigue siendo 0  
-
-...   
+**Ingresos.**    
 
 Convertimos el ejemplo en un test:   
 ```java
-    @Test
-	@DisplayName("No se puede ingresar Cantidad Negativa")
-	 void test05() {
-        Cuenta c = new Cuenta();
-        c.ingreso(-100);
-        assertEquals(3100, c.getSaldo());
-    }
+	@Test
+	@DisplayName("#5 Al ingresar -100 en Cuenta nueva el Saldo es 0")
+	void test05() {
+		Cuenta c = new Cuenta();
+		c.ingreso(-100);
+		assertEquals(0, c.getSaldo());
+	}
 ```
 
 Los nombres de los tests, mejor la especificación que el ejemplo en sí.
@@ -516,13 +511,14 @@ El test falla.
 Paso 2: escribir el código:
 
 ```java 
-    public void ingreso(float cantidad){
- 	if(cantidad < 0){
-            this.saldo = 0;
-        } else {
+	public void ingreso(double cantidad){
+        Boolean esValida = validarCantidadIngresada(cantidad);
+        if(esValida){ 
             this.saldo += cantidad;
-        }
-	}
+        } else {
+            this.saldo = 0;
+        } 
+    }
 ```
 
 Pasa los tests. 
@@ -549,11 +545,14 @@ No observamos nada que refactorizar, seguimos con el resto de casos
 
 Tests:
 ```java
-    @Test
-	@DisplayName("Ingreso Cantidad con 2 Decimales")
-	 void test06() {
+	@Test
+    @DisplayName("Al Ingresar 100.45 en CtaNueva saldo 100.45")
+    void test06(){
+        //preparacion
         Cuenta c = new Cuenta();
+        //ejecucion
         c.ingreso(100.45);
+        // asercion/Confirmacion
         assertEquals(100.45, c.getSaldo());
     }
 ```
