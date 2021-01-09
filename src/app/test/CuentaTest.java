@@ -5,13 +5,40 @@ import org.junit.jupiter.api.*;
 
 import app.core.Cuenta;
 
-/*
+/* PLANTILLAS DE TESTS
 @Test
 @DisplayName("")
 void test() {
 	fail("Not yet implemented");
 	//assertEquals(0, 0);
 }
+
+@BeforeAll
+static void initAll() {
+}
+
+@BeforeEach
+void init() {
+}
+
+@Test
+@Disabled("este tests no se ejecuta")
+void skippedTest() {
+	// not executed
+}
+
+@AfterEach
+void tearDown() {
+}
+
+@AfterAll
+static void tearDownAll() {
+}
+
+@Nested
+class TestsAgrupados {
+}
+
 */
 
 class CuentaTest {
