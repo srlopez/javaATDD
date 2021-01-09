@@ -104,13 +104,14 @@ Antes es conveniente que se hayan ordenado por funcionalidad, agrupando todos lo
   `test#16`. Si retiro 6000.01 en una cuenta con 7000, no ocurre nada y el saldo sigue siendo 7000
   
 **Transferencias**
-- Al hacer una transferencia de 100 desde una cuenta con 500 a una con 50, en la primera cuenta el saldo se quedará en 400 y en la segunda se quedará en 150.
-- No se pueden transferir cantidades negativas  
-  `test#17`. Al hacer una transferencia de -100 desde una cuenta con 500 a una con 50, los saldos se quedan en 500 y 50 respectivamente
+- No se pueden transferir cantidades negativas
+- El límite cantidad transferida es de 3000
+- `test#17`. Al hacer una transferencia de 100 desde una cuenta con 500 a una con 50, en la primera cuenta el saldo se quedará en 400 y en la segunda se quedará en 150.
+- `test#18`. Al hacer una transferencia de -100 desde una cuenta con 500 a una con 50, los saldos se quedan en 500 y 50 respectivamente
 - El límite de transferencias en un mismo día desde una misma cuenta es de 3000:  
-  `test#18`. Al hacer una transferencia de 3000 desde una cuenta con 3500 a una con 50, en la primera cuenta el saldo se quedará en 500 y en la segunda se quedará en 3050.  
-  `test#19`. Al hacer una transferencia de 3000.01 desde una cuenta con 3500 a una con 50, en la primera cuenta el saldo se quedará en 3500 y en la segunda se quedará en 50.  
-  `test#20`. Al hacer una transferencia de 2000 desde una cuenta con 3500 a una con 50, y justo después otra de 1200, en la primera cuenta el saldo se quedará en 1500 y en la segunda se quedará en 2050.
+  `test#19`. Al hacer una transferencia de 3000 desde una cuenta con 3500 a una con 50, en la primera cuenta el saldo se quedará en 500 y en la segunda se quedará en 3050.  
+  `test#20`. Al hacer una transferencia de 3000.01 desde una cuenta con 3500 a una con 50, en la primera cuenta el saldo se quedará en 3500 y en la segunda se quedará en 50.  
+  `test#21`. Al hacer una transferencia de 2000 desde una cuenta con 3500 a una con 50, y justo después otra de 1200, en la primera cuenta el saldo se quedará en 1500 y en la segunda se quedará en 2050.
 
 Y ahora **sí**, hemos acabado de capturar **las especificaciones**. Con esto ya podemos empezar a escribir tests y a programar siguiendo el **algoritmo TDD** visto con anterioridad. Cada ejemplo marcado en negrita, se convertirá en un test que habrá que pasar posteriormente.
 
@@ -804,7 +805,7 @@ Empezar con TDD no es coser y cantar. A lo largo del proceso surgen muchas dudas
 A continuación enumero una pequeña lista de errores comunes al empezar con TDD.  
 - El nombre del test no es suficientemente descriptivo
 Recordemos que el nombre de un método y de sus parámetros son su mejor documentación. En el caso de un test, su nombre debe expresar con total claridad la intención del mismo.
-- Los nombres de los tests se deben parecer a esto:
+- Los nombres de los tests **TRADICIONALMETE** se deben parecer a esto:
   - IngresoCantidadMasDe2DecimalesNoEsValido
   - AlRetirar100EnCuentaCon500ElSaldoEs400
   - AlRetirar200EnCuentaCon1200ElSaldoEs1000YAlRetirarOtros150ElSaldoEs850   
@@ -813,6 +814,7 @@ y no a esto:
   - testRetirada2
   - testRetirada3
   - testForBUG128
+**OJO con @DisplayName NOS LO PERMITIMOS HACER**
 
 aunque no debemos ser estrictos con JUnit5 ya que podemos utilizar el `@DisplayNmae`.
 
