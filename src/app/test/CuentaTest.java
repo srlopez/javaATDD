@@ -10,7 +10,11 @@ import app.core.Cuenta;
 @DisplayName("")
 void test() {
 	fail("Not yet implemented");
-	//assertEquals(0, 0);
+	//assertEquals(0, 0, "Mensaje");
+	//assertAll("Mensaje TODOS",
+	// () -> assertEquals( 0,0, "Mensaje 1"),
+	// () -> assertEquals( 0,0, "Mensaje 2")
+	// );
 }
 
 @BeforeAll
@@ -233,7 +237,8 @@ class CuentaTest {
 		@Test
 		@DisplayName("#19 Al hacer una transferencia de 3000 desde una cuenta con 3500 a una con 50, en la primera cuenta el saldo se quedará en 500 y en la segunda se quedará en 3050.")
 		void test19() {
-			// Este Test Npo Aporta NADA está mal planteado == test17
+			// Verifica un Ingreso > MaxCantidad Transferida permitida
+			// Pero ...
 			Cuenta c1 = new Cuenta();
 			c1.ingreso(3500);
 			Cuenta c2 = new Cuenta();
@@ -274,9 +279,9 @@ class CuentaTest {
 			c1.transferencia(2000, c2);
 			c1.transferencia(1200, c2);
 			
-			assertAll(
-			() -> assertEquals(1500, c1.getSaldo()),
-			() -> assertEquals(2050, c2.getSaldo())
+			assertAll("Solo se realiza una tranferencia",
+			() -> assertEquals( 150, c1.getSaldo(), "Saldo c1"),
+			() -> assertEquals(2050, c2.getSaldo(), "Saldo c2")
 			);
 		}
 	}
