@@ -20,6 +20,7 @@ public class Cuenta {
 		Boolean esValida = validarCantidad(cantidad);
 		if (esValida) {
 			this.saldo += cantidad;
+			this.saldo = Math.floor(this.saldo * 100) / 100d;
 			return true;
 		}
 		return false;
@@ -30,6 +31,7 @@ public class Cuenta {
 		Boolean esValida = validarCantidadRetirada(cantidad);
 		if (esValida) {
 			this.saldo -= cantidad;
+			this.saldo = Math.floor(this.saldo * 100) / 100d;
 			return true;
 		}
 		return false;
