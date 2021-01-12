@@ -14,41 +14,46 @@ public class Cuenta {
 
 	public double getSaldo() {
 		return this.saldo;
+	}	
+	
+	public double setSaldo(double cantidad) {
+		// Siempre con 2 decimales
+		this.saldo = Math.floor(cantidad * 100) / 100d;
+		return this.saldo;
 	}
 
 	public Boolean ingreso(double cantidad) {
-		Boolean esValida = validarCantidad(cantidad);
-		if (esValida) {
-			this.saldo += cantidad;
-			this.saldo = Math.floor(this.saldo * 100) / 100d;
+		Boolean cantidadaEsValida = validarCantidad(cantidad);
+		if (cantidadaEsValida) {
+			this.saldo = setSaldo(this.saldo + cantidad);
 			return true;
 		}
-		return false;
 
+		return false;
 	}
 
 	public Boolean retirada(double cantidad) {
-		Boolean esValida = validarCantidadRetirada(cantidad);
-		if (esValida) {
-			this.saldo -= cantidad;
-			this.saldo = Math.floor(this.saldo * 100) / 100d;
+		Boolean cantidadaEsValida = validarCantidadRetirada(cantidad);
+		if (cantidadaEsValida) {
+			this.saldo = setSaldo(this.saldo - cantidad);
 			return true;
 		}
+
 		return false;
 	}
 
 	public Boolean transferencia(double cantidad, Cuenta ctaDestino) {
-		Boolean esValida = validarCantidadTranferida(cantidad);
-		if (nTransferencias==0 && esValida && retirada(cantidad) && ctaDestino.ingreso(cantidad)){
+		Boolean cantidadaEsValida = validarCantidadTranferida(cantidad);
+		Boolean transferenciaPermitida = (nTransferencias == 0);
+		if ( transferenciaPermitida && cantidadaEsValida && retirada(cantidad) && ctaDestino.ingreso(cantidad)) {
 			nTransferencias++;
 			return true;
 		}
-		return false;
 
+		return false;
 	}
 
 	private Boolean validarCantidad(double cantidad) {
-
 		double c2dec = Math.floor(cantidad * 100) / 100d;
 		if (c2dec != cantidad)
 			return false;
@@ -63,6 +68,7 @@ public class Cuenta {
 	private Boolean validarCantidadRetirada(double cantidad) {
 		if (cantidad > this.saldo)
 			return false;
+
 		return validarCantidad(cantidad);
 	}
 
