@@ -143,3 +143,5 @@ Genial. Ya tenemos 4 tests de aceptación para la funcionalidad de "mostrar los 
 Otras consideraciones:  
 Otra ventaja de dirigir el desarrollo por los ejemplos, es que vamos a poder comprobar muy rápido si el programa está cumpliendo los objetivos o no. Conocemos en qué punto estamos y cómo vamos progresando. El Dueño de Producto puede revisar los tests de aceptación y ver cuántos se están cumpliendo, así que nuestro trabajo gana una confianza tremenda.
 
+
+[curso-unit-testing-phpunit](https://github.com/carherco/curso-unit-testing-phpunit/blob/master/docs/dobles.md)
