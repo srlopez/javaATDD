@@ -21,7 +21,7 @@ void test() {
 }
 
 @BeforeAll
-static void initAll() {
+void initAll() {
 }
 
 @BeforeEach
@@ -39,7 +39,7 @@ void tearDown() {
 }
 
 @AfterAll
-static void tearDownAll() {
+void tearDownAll() {
 }
 
 @Nested
